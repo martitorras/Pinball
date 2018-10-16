@@ -9,7 +9,12 @@
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
-	circle = box = rick = NULL;
+	/*circle = box = rick = NULL;*/
+	background = NULL;
+	background_rect.x = 14;
+	background_rect.y = 8;
+	background_rect.w = 452;
+	background_rect.h = 739;
 }
 
 ModuleSceneIntro::~ModuleSceneIntro()
@@ -23,12 +28,14 @@ bool ModuleSceneIntro::Start()
 
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
-	circle = App->textures->Load("pinball/wheel.png"); 
+	/*circle = App->textures->Load("pinball/wheel.png"); 
 	box = App->textures->Load("pinball/crate.png");
 	rick = App->textures->Load("pinball/rick_head.png");
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 
-	sensor = App->physics->CreateRectangleSensor(100, 100, 100, 100);
+	sensor = App->physics->CreateRectangleSensor(100, 100, 100, 100);*/
+
+	background = App->textures->Load("pinball/pinball.png");
 
 	return ret;
 }
@@ -37,9 +44,11 @@ bool ModuleSceneIntro::Start()
 bool ModuleSceneIntro::CleanUp()
 {
 	LOG("Unloading Intro scene");
-	App->textures->Unload(circle);
+	/*App->textures->Unload(circle);
 	App->textures->Unload(box);
-	App->textures->Unload(rick);
+	App->textures->Unload(rick);*/
+
+	App->textures->Unload(background);
 
 	return true;
 }
@@ -47,7 +56,7 @@ bool ModuleSceneIntro::CleanUp()
 // Update: draw background
 update_status ModuleSceneIntro::Update()
 {
-	if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+	/*if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
 		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 25));
 		circles.getLast()->data->listener = this;
@@ -97,7 +106,7 @@ update_status ModuleSceneIntro::Update()
 		};
 
 		ricks.add(App->physics->CreateChain(App->input->GetMouseX(), App->input->GetMouseY(), rick_head, 64));
-	}
+	}*/
 
 	// Prepare for raycast ------------------------------------------------------
 	
@@ -106,7 +115,7 @@ update_status ModuleSceneIntro::Update()
 	mouse.y = App->input->GetMouseY();
 
 	// All draw functions ------------------------------------------------------
-	p2List_item<PhysBody*>* c = circles.getFirst();
+	/*p2List_item<PhysBody*>* c = circles.getFirst();
 
 	while(c != NULL)
 	{
@@ -134,12 +143,14 @@ update_status ModuleSceneIntro::Update()
 		c->data->GetPosition(x, y);
 		App->renderer->Blit(rick, x, y, NULL, 1.0f, c->data->GetRotation());
 		c = c->next;
-	}
+	}*/
+
+	App->renderer->Blit(background, 0, 0, &background_rect);
 
 	return UPDATE_CONTINUE;
 }
 
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
-	App->audio->PlayFx(bonus_fx);
+	/*App->audio->PlayFx(bonus_fx);*/
 }
