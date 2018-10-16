@@ -35,24 +35,6 @@ bool ModulePhysics::Start()
 	b2BodyDef bd;
 	ground = world->CreateBody(&bd);
 
-	// big static circle as "ground" in the middle of the screen
-	int x = SCREEN_WIDTH / 2;
-	int y = SCREEN_HEIGHT / 1.5f;
-	int diameter = SCREEN_WIDTH / 2;
-
-	b2BodyDef body;
-	body.type = b2_staticBody;
-	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
-
-	big_ball = world->CreateBody(&body);
-
-	b2CircleShape shape;
-	shape.m_radius = PIXEL_TO_METERS(diameter) * 0.5f;
-
-	b2FixtureDef fixture;
-	fixture.shape = &shape;
-	big_ball->CreateFixture(&fixture);
-
 	return true;
 }
 
@@ -185,6 +167,79 @@ PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size)
 	return pbody;
 }
 
+PhysBody* ModulePhysics::CreateLeftFlipper()
+{
+	b2BodyDef body;
+	body.type = b2_dynamicBody;
+	body.position.Set(PIXEL_TO_METERS(125), PIXEL_TO_METERS(517));
+
+	b2Body* b = world->CreateBody(&body);
+
+	b2ChainShape shape;
+	b2Vec2* p = new b2Vec2[14 / 2];
+
+	int left_flipper_points[14] = 
+	{
+		16, 132,
+		54, 130,
+		63, 132,
+		68, 138,
+		64, 142,
+		52, 144,
+		16, 143
+	};
+
+	for (uint i = 0; i < 14 / 2; ++i)
+	{
+		p[i].x = PIXEL_TO_METERS(left_flipper_points[i * 2 + 0]);
+		p[i].y = PIXEL_TO_METERS(left_flipper_points[i * 2 + 1]);
+	}
+
+	shape.CreateLoop(p, 14 / 2);
+
+	b2FixtureDef fixture;
+	fixture.shape = &shape;
+	fixture.density = 1.0f;
+	b->CreateFixture(&fixture);
+	
+	// We need to do a joint to a circle in order to do the circular movement
+	b2Vec2 center = b->GetWorldCenter();
+	center += (b2Vec2(PIXEL_TO_METERS(0), 0)); // We need to find the center of the flipper, and add to the world center!
+
+	// Circle
+	b2BodyDef body_circle;
+	body_circle.type = b2_staticBody;
+	body_circle.position.Set(center.x, center.y);
+
+	b2CircleShape circle_shape;
+	circle_shape.m_radius = PIXEL_TO_METERS(0.8f);
+	b2FixtureDef circle_fixture;
+	circle_fixture.shape = &circle_shape;
+
+	b2Body* b_circle = world->CreateBody(&body_circle);
+
+	b_circle->CreateFixture(&circle_fixture);
+
+	// Join flipper and circle
+	b2RevoluteJointDef revolute_joint;
+	revolute_joint.Initialize(b, b_circle, center);
+	revolute_joint.upperAngle = 0.6f;
+	revolute_joint.lowerAngle = -0.6f;
+	revolute_joint.enableLimit = true;
+	revolute_joint.maxMotorTorque = 10.0;
+	revolute_joint.motorSpeed = 0.0;
+	revolute_joint.enableMotor = true;
+	b2Joint *joint = world->CreateJoint(&revolute_joint);
+
+	PhysBody* pbody = new PhysBody();
+	pbody->body = b;
+	pbody->b_attached = b_circle;
+	pbody->joint = joint;
+	b->SetUserData(pbody);
+
+	return pbody;
+}
+
 // 
 update_status ModulePhysics::PostUpdate()
 {
@@ -193,7 +248,7 @@ update_status ModulePhysics::PostUpdate()
 
 	if(!debug)
 		return UPDATE_CONTINUE;
-
+	
 	b2Body* body_clicked = nullptr;
 	b2Vec2 mouse_position = { PIXEL_TO_METERS(App->input->GetMouseX()), PIXEL_TO_METERS(App->input->GetMouseY()) };
 
@@ -267,7 +322,7 @@ update_status ModulePhysics::PostUpdate()
 				break;
 			}
 
-			/*
+			
 			// TODO 1: If mouse button 1 is pressed ...
 			if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN)
 			{
@@ -277,7 +332,6 @@ update_status ModulePhysics::PostUpdate()
 					body_clicked = b;
 				}
 			}
-			*/
 		}
 	}
 
@@ -296,22 +350,7 @@ update_status ModulePhysics::PostUpdate()
 		def.maxForce = 100.0f * body_clicked->GetMass();
 
 		mouse_joint = (b2MouseJoint*)world->CreateJoint(&def);
-
-
-		b2DistanceJointDef distance_def;
-
-		distance_def.Initialize(big_ball, body_clicked, big_ball->GetWorldCenter(), body_clicked->GetWorldCenter());
-		distance_def.dampingRatio = 0.5f;
-		distance_def.frequencyHz = 2.0f;
-
-		distance_joint = (b2DistanceJoint*)world->CreateJoint(&distance_def);
-
-		// Motor joint
-		b2MotorJointDef motor_def;
-		motor_def.Initialize(big_ball, body_clicked);
-
-		motor_def.maxForce = 50.0f;
-		motor_def.maxTorque = 0.0f;
+		body_clicked = nullptr;
 	}
 
 	// TODO 3: If the player keeps pressing the mouse button, update
@@ -327,13 +366,13 @@ update_status ModulePhysics::PostUpdate()
 		App->renderer->DrawLine(METERS_TO_PIXELS(anchorA.x), METERS_TO_PIXELS(anchorA.y), METERS_TO_PIXELS(anchorB.x), METERS_TO_PIXELS(anchorB.y), 255, 0, 0);
 	}
 
-	if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_REPEAT && distance_joint != nullptr) {
+	/*if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_REPEAT && distance_joint != nullptr) {
 
 		b2Vec2 anchorA = distance_joint->GetBodyA()->GetPosition();
 		b2Vec2 anchorB = distance_joint->GetBodyB()->GetPosition();
 
 		App->renderer->DrawLine(METERS_TO_PIXELS(anchorA.x), METERS_TO_PIXELS(anchorA.y), METERS_TO_PIXELS(anchorB.x), METERS_TO_PIXELS(anchorB.y), 255, 0, 0);
-	}
+	}*/
 
 	// TODO 4: If the player releases the mouse button, destroy the joint
 	if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_UP) {
@@ -343,10 +382,10 @@ update_status ModulePhysics::PostUpdate()
 			mouse_joint = nullptr;
 		}
 
-		if (distance_joint != nullptr) {
+		/*if (distance_joint != nullptr) {
 		world->DestroyJoint(distance_joint);
 		distance_joint = nullptr;
-		}
+		}*/
 	}
 
 	return UPDATE_CONTINUE;

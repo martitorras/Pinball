@@ -27,6 +27,8 @@ public:
 public:
 	int width, height;
 	b2Body* body;
+	b2Body* b_attached;
+	b2Joint* joint;
 	Module* listener;
 };
 
@@ -47,17 +49,15 @@ public:
 	PhysBody* CreateRectangleSensor(int x, int y, int width, int height);
 	PhysBody* CreateChain(int x, int y, int* points, int size);
 
+	PhysBody* CreateLeftFlipper();
+
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);
-
-	// Vars
-	b2Body* big_ball = nullptr;
+	b2World* world;
 	
 private:
-
 	bool debug;
-	b2World* world;
+	
 	b2MouseJoint* mouse_joint;
-	b2DistanceJoint* distance_joint;
 	b2Body* ground;
 };

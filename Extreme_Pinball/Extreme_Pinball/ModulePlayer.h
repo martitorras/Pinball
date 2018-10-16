@@ -3,6 +3,11 @@
 #include "Globals.h"
 #include "p2Point.h"
 
+#include "SDL/include/SDL_rect.h"
+
+class PhysBody;
+struct SDL_Texture;
+
 class ModulePlayer : public Module
 {
 public:
@@ -14,5 +19,8 @@ public:
 	bool CleanUp();
 
 public:
+	PhysBody* left_flipper;
 
+	SDL_Texture* flipper_texture;
+	SDL_Rect left_flipper_rect;
 };
