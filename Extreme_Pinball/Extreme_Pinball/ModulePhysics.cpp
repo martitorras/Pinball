@@ -133,10 +133,10 @@ PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int heig
 	return pbody;
 }
 
-PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size)
+PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size, b2BodyType type)
 {
 	b2BodyDef body;
-	body.type = b2_dynamicBody;
+	body.type = type;
 	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
 
 	b2Body* b = world->CreateBody(&body);
@@ -207,6 +207,79 @@ PhysBody* ModulePhysics::CreateLeftFlipper()
 	center += (b2Vec2(PIXEL_TO_METERS(0), 0)); // We need to find the center of the flipper, and add to the world center!
 
 	// Circle
+	b2BodyDef body_circle;
+	body_circle.type = b2_staticBody;
+	body_circle.position.Set(center.x, center.y);
+
+	b2CircleShape circle_shape;
+	circle_shape.m_radius = PIXEL_TO_METERS(0.8f);
+	b2FixtureDef circle_fixture;
+	circle_fixture.shape = &circle_shape;
+
+	b2Body* b_circle = world->CreateBody(&body_circle);
+
+	b_circle->CreateFixture(&circle_fixture);
+
+	// Join flipper and circle
+	b2RevoluteJointDef revolute_joint;
+	revolute_joint.Initialize(b, b_circle, center);
+	revolute_joint.upperAngle = 0.6f;
+	revolute_joint.lowerAngle = -0.6f;
+	revolute_joint.enableLimit = true;
+	revolute_joint.maxMotorTorque = 10.0;
+	revolute_joint.motorSpeed = 0.0;
+	revolute_joint.enableMotor = true;
+	b2Joint *joint = world->CreateJoint(&revolute_joint);
+
+	PhysBody* pbody = new PhysBody();
+	pbody->body = b;
+	pbody->b_attached = b_circle;
+	pbody->joint = joint;
+	b->SetUserData(pbody);
+
+	return pbody;
+}
+
+PhysBody* ModulePhysics::CreateRightFlipper()
+{
+	b2BodyDef body;
+	body.type = b2_dynamicBody;
+	body.position.Set(PIXEL_TO_METERS(134), PIXEL_TO_METERS(517));
+
+	b2Body* b = world->CreateBody(&body);
+
+	b2ChainShape shape;
+	b2Vec2* p = new b2Vec2[14 / 2];
+
+	int right_flipper_points[14] =
+	{
+		140, 134,
+		100, 132,
+		92, 135,
+		87, 140,
+		91, 145,
+		100, 147,
+		140, 145
+	};
+
+	for (uint i = 0; i < 14 / 2; ++i)
+	{
+		p[i].x = PIXEL_TO_METERS(right_flipper_points[i * 2 + 0]);
+		p[i].y = PIXEL_TO_METERS(right_flipper_points[i * 2 + 1]);
+	}
+
+	shape.CreateLoop(p, 14 / 2);
+
+	b2FixtureDef fixture;
+	fixture.shape = &shape;
+	fixture.density = 1.0f;
+	b->CreateFixture(&fixture);
+
+	// We need to do a joint to a circle in order to do the circular movement
+	b2Vec2 center = b->GetWorldCenter();
+	center += (b2Vec2(PIXEL_TO_METERS(0), 0)); // We need to find the center of the flipper, and add to the world center!
+
+											   // Circle
 	b2BodyDef body_circle;
 	body_circle.type = b2_staticBody;
 	body_circle.position.Set(center.x, center.y);

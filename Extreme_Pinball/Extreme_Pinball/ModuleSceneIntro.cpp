@@ -37,6 +37,8 @@ bool ModuleSceneIntro::Start()
 
 	background = App->textures->Load("pinball/pinball.png");
 
+	SetChains();
+
 	return ret;
 }
 
@@ -153,4 +155,28 @@ update_status ModuleSceneIntro::Update()
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
 	/*App->audio->PlayFx(bonus_fx);*/
+}
+
+
+void ModuleSceneIntro::SetChains()
+{
+	int left_bouncer[6] = {
+		20, 244,
+		58, 320,
+		21, 302
+	};
+
+	int right_bouncer[6] = {
+		148, 245,
+		111, 319,
+		149, 300
+	};
+
+	leftBouncer = App->physics->CreateChain(82, 308, left_bouncer, 6, b2_staticBody);
+	leftBouncer->body->GetFixtureList()->SetRestitution(2.0f); // Add more bounce
+	leftBouncer->listener = this;
+
+	rightBouncer = App->physics->CreateChain(167, 308, right_bouncer, 6, b2_staticBody);
+	rightBouncer->body->GetFixtureList()->SetRestitution(2.0f); // Add more bounce
+	rightBouncer->listener = this;
 }

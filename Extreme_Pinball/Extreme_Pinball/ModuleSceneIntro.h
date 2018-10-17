@@ -18,6 +18,9 @@ public:
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 
 public:
+	void SetChains();
+
+public:
 	/*p2List<PhysBody*> circles;
 	p2List<PhysBody*> boxes;
 	p2List<PhysBody*> ricks;
@@ -31,4 +34,9 @@ public:
 
 	SDL_Texture* background;
 	SDL_Rect background_rect;
+
+
+private:
+	PhysBody* leftBouncer;
+	PhysBody* rightBouncer;
 };

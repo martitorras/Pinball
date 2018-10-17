@@ -20,7 +20,9 @@ public:
 
 public:
 	PhysBody* left_flipper;
+	PhysBody* right_flipper;
 
 	SDL_Texture* flipper_texture;
 	SDL_Rect left_flipper_rect;
+	SDL_Rect right_flipper_rect;
 };

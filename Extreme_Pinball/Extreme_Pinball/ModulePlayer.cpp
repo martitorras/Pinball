@@ -12,6 +12,11 @@ ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, s
 	left_flipper_rect.y = 130;
 	left_flipper_rect.w = 56;
 	left_flipper_rect.h = 18;
+
+	right_flipper_rect.x = 87;
+	right_flipper_rect.y = 131;
+	right_flipper_rect.w = 56;
+	right_flipper_rect.h = 18;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -22,7 +27,9 @@ bool ModulePlayer::Start()
 {
 	LOG("Loading player");
 	flipper_texture = App->textures->Load("pinball/pinball_elements_2.png");
+
 	left_flipper = App->physics->CreateLeftFlipper();
+	right_flipper = App->physics->CreateRightFlipper();
 
 	return true;
 }
@@ -37,6 +44,10 @@ bool ModulePlayer::CleanUp()
 	App->physics->world->DestroyBody(left_flipper->body);
 	left_flipper = nullptr;
 
+	App->physics->world->DestroyBody(right_flipper->b_attached);
+	App->physics->world->DestroyBody(right_flipper->body);
+	right_flipper = nullptr;
+
 	return true;
 }
 
@@ -45,6 +56,7 @@ update_status ModulePlayer::Update()
 {
 	b2Vec2 anchor_left = left_flipper->joint->GetAnchorB();
 	App->renderer->Blit(flipper_texture, 140, 645, &left_flipper_rect, 1.0f, left_flipper->GetRotation(), anchor_left.x, anchor_left.y); // Pos of the anchor?
+	App->renderer->Blit(flipper_texture, 220, 647, &right_flipper_rect, 1.0f, left_flipper->GetRotation(), anchor_left.x, anchor_left.y); // Pos of the anchor?
 
 	return UPDATE_CONTINUE;
 }
