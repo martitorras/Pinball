@@ -154,7 +154,7 @@ update_status ModuleSceneIntro::Update()
 
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
-	/*App->audio->PlayFx(bonus_fx);*/
+	
 }
 
 
@@ -172,6 +172,7 @@ void ModuleSceneIntro::SetChains()
 		149, 300
 	};
 
+	/* Bouncers */
 	leftBouncer = App->physics->CreateChain(82, 308, left_bouncer, 6, b2_staticBody);
 	leftBouncer->body->GetFixtureList()->SetRestitution(2.0f); // Add more bounce
 	leftBouncer->listener = this;
@@ -179,4 +180,27 @@ void ModuleSceneIntro::SetChains()
 	rightBouncer = App->physics->CreateChain(167, 308, right_bouncer, 6, b2_staticBody);
 	rightBouncer->body->GetFixtureList()->SetRestitution(2.0f); // Add more bounce
 	rightBouncer->listener = this;
+
+	/* Sensors */
+	left_sensor_10 = App->physics->CreateRectangleSensor(156, 562, 18, 18);
+	//left_sensor_10->body->GetFixtureList()->SetSensor(); // not necessary, it can be a fuction parameter on the createrectangle() funciton, for example, and will not be needed to create this function hehexd.
+	left_sensor_10->listener = this;
+
+	right_sensor_10 = App->physics->CreateRectangleSensor(260, 562, 18, 18);
+	right_sensor_10->listener = this;
+
+	right_sensor_10 = App->physics->CreateRectangleSensor(260, 562, 18, 18);
+	right_sensor_10->listener = this;
+
+	left_sensor_25 = App->physics->CreateRectangleSensor(119, 534, 18, 18);
+	left_sensor_25->listener = this;
+
+	right_sensor_25 = App->physics->CreateRectangleSensor(293, 534, 18, 18);
+	right_sensor_25->listener = this;
+
+	left_sensor_50 = App->physics->CreateRectangleSensor(91, 510, 18, 18);
+	left_sensor_50->listener = this;
+
+	right_sensor_50 = App->physics->CreateRectangleSensor(322, 510, 18, 18);
+	right_sensor_50->listener = this;
 }

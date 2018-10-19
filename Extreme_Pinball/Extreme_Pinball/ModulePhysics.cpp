@@ -279,7 +279,7 @@ PhysBody* ModulePhysics::CreateRightFlipper()
 	b2Vec2 center = b->GetWorldCenter();
 	center += (b2Vec2(PIXEL_TO_METERS(0), 0)); // We need to find the center of the flipper, and add to the world center!
 
-											   // Circle
+    // Circle
 	b2BodyDef body_circle;
 	body_circle.type = b2_staticBody;
 	body_circle.position.Set(center.x, center.y);

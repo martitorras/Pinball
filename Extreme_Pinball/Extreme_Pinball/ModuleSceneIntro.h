@@ -37,6 +37,15 @@ public:
 
 
 private:
+	// Bouncers
 	PhysBody* leftBouncer;
 	PhysBody* rightBouncer;
+
+	// Sensors
+	PhysBody* left_sensor_10;
+	PhysBody* right_sensor_10;
+	PhysBody* left_sensor_25;
+	PhysBody* right_sensor_25;
+	PhysBody* left_sensor_50;
+	PhysBody* right_sensor_50;
 };
