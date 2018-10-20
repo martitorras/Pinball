@@ -160,6 +160,13 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 
 void ModuleSceneIntro::SetChains()
 {
+	int game_boundaries[8] = {
+		30, 19,
+		450, 18,
+		450, 727,
+		31, 727
+	};
+
 	int left_bouncer[6] = {
 		20, 244,
 		58, 320,
@@ -171,6 +178,10 @@ void ModuleSceneIntro::SetChains()
 		111, 319,
 		149, 300
 	};
+
+	/* Game boundaries */
+	gameBoundaries = App->physics->CreateChain(-14, -10, game_boundaries, 8, b2_staticBody);
+	gameBoundaries->listener = this;
 
 	/* Bouncers */
 	leftBouncer = App->physics->CreateChain(82, 308, left_bouncer, 6, b2_staticBody);
