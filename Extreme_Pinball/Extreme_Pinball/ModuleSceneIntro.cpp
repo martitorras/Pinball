@@ -235,13 +235,13 @@ void ModuleSceneIntro::SetChains()
 	ladder3->listener = this;
 
 	/* Ball corridor */
-	ballCorridorDown = App->physics->CreateRectangle(396, 660, 21, 1, b2_staticBody, false);
+	ballCorridorDown = App->physics->CreateRectangle(396, 660, 21, 0, b2_staticBody, false);
 	ballCorridorDown->listener = this;
 
-	ballCorridorLeft = App->physics->CreateRectangle(386, 426, 1, 465, b2_staticBody, false);
+	ballCorridorLeft = App->physics->CreateRectangle(386, 426, 0, 465, b2_staticBody, false);
 	ballCorridorLeft->listener = this;
 
-	ballCorridorRight = App->physics->CreateRectangle(406, 410, 1, 500, b2_staticBody, false);
+	ballCorridorRight = App->physics->CreateRectangle(406, 410, 0, 500, b2_staticBody, false);
 	ballCorridorRight->listener = this;
 
 	/* Sensors */
