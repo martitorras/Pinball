@@ -74,7 +74,7 @@ update_status ModulePlayer::Update()
 
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
 	{
-		launcher->body->ApplyForceToCenter({0, 10}, true);
+		launcher->body->ApplyForceToCenter({0, 1000}, true);
 	}
 
 	return UPDATE_CONTINUE;
