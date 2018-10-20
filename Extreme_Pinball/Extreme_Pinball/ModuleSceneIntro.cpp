@@ -256,4 +256,7 @@ void ModuleSceneIntro::SetChains()
 
 	right_sensor_50 = App->physics->CreateCircle(322, 510, 15, true);
 	right_sensor_50->listener = this;
+
+	x2_sensor = App->physics->CreateCircle(226, 430, 18, true);
+	x2_sensor->listener = this;
 }

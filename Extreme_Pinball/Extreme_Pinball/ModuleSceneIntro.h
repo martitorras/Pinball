@@ -60,4 +60,5 @@ private:
 	PhysBody* right_sensor_25;
 	PhysBody* left_sensor_50;
 	PhysBody* right_sensor_50;
+	PhysBody* x2_sensor;
 };
