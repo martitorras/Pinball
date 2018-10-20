@@ -22,6 +22,11 @@ ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, s
 	ball_rect.y = 71;
 	ball_rect.w = 15;
 	ball_rect.h = 14;
+
+	launcher_rect.x = 349;
+	launcher_rect.y = 289;
+	launcher_rect.w = 13;
+	launcher_rect.h = 2;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -77,5 +82,9 @@ update_status ModulePlayer::Update()
 		launcher->body->ApplyForceToCenter({0, 1000}, true);
 	}
 
+	int xx, yy;
+	launcher->GetPosition(xx, yy);
+	App->renderer->Blit(textures, xx + 1, yy, &launcher_rect, 1.0f, launcher->GetRotation());
+	
 	return UPDATE_CONTINUE;
 }
