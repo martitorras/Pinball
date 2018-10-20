@@ -193,25 +193,25 @@ void ModuleSceneIntro::SetChains()
 	rightBouncer->listener = this;
 
 	/* Sensors */
-	left_sensor_10 = App->physics->CreateRectangleSensor(156, 562, 18, 18);
+	left_sensor_10 = App->physics->CreateRectangle(156, 562, 18, 18, true);
 	//left_sensor_10->body->GetFixtureList()->SetSensor(); // not necessary, it can be a fuction parameter on the createrectangle() funciton, for example, and will not be needed to create this function hehexd.
 	left_sensor_10->listener = this;
 
-	right_sensor_10 = App->physics->CreateRectangleSensor(260, 562, 18, 18);
+	right_sensor_10 = App->physics->CreateRectangle(260, 562, 18, 18, true);
 	right_sensor_10->listener = this;
 
-	right_sensor_10 = App->physics->CreateRectangleSensor(260, 562, 18, 18);
+	right_sensor_10 = App->physics->CreateRectangle(260, 562, 18, 18, true);
 	right_sensor_10->listener = this;
 
-	left_sensor_25 = App->physics->CreateRectangleSensor(119, 534, 18, 18);
+	left_sensor_25 = App->physics->CreateRectangle(119, 534, 18, 18, true);
 	left_sensor_25->listener = this;
 
-	right_sensor_25 = App->physics->CreateRectangleSensor(293, 534, 18, 18);
+	right_sensor_25 = App->physics->CreateRectangle(293, 534, 18, 18, true);
 	right_sensor_25->listener = this;
 
-	left_sensor_50 = App->physics->CreateRectangleSensor(91, 510, 18, 18);
+	left_sensor_50 = App->physics->CreateRectangle(91, 510, 18, 18, true);
 	left_sensor_50->listener = this;
 
-	right_sensor_50 = App->physics->CreateRectangleSensor(322, 510, 18, 18);
+	right_sensor_50 = App->physics->CreateRectangle(322, 510, 18, 18, true);
 	right_sensor_50->listener = this;
 }
