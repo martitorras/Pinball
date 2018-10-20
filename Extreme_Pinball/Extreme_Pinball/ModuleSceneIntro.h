@@ -53,6 +53,11 @@ private:
 	PhysBody* ladder2;
 	PhysBody* ladder3;
 
+	// Ball corridor
+	PhysBody* ballCorridorDown;
+	PhysBody* ballCorridorLeft;
+	PhysBody* ballCorridorRight;
+
 	// Sensors
 	PhysBody* left_sensor_10;
 	PhysBody* right_sensor_10;

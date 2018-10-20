@@ -57,13 +57,10 @@ update_status ModulePhysics::PreUpdate()
 	return UPDATE_CONTINUE;
 }
 
-PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, bool is_sensor)
+PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, b2BodyType type, bool is_sensor)
 {
 	b2BodyDef body;
-	if(is_sensor)
-		body.type = b2_staticBody;
-	else
-		body.type = b2_dynamicBody;
+	body.type = type;
 	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
 
 	b2Body* b = world->CreateBody(&body);
@@ -85,13 +82,10 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius, bool is_sensor)
 	return pbody;
 }
 
-PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, bool is_sensor)
+PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height, b2BodyType type, bool is_sensor)
 {
 	b2BodyDef body;
-	if (is_sensor)
-		body.type = b2_staticBody;
-	else
-		body.type = b2_dynamicBody;
+	body.type = type;
 	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
 
 	b2Body* b = world->CreateBody(&body);

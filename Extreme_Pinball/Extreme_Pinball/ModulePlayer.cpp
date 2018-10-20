@@ -35,7 +35,7 @@ bool ModulePlayer::Start()
 
 	left_flipper = App->physics->CreateLeftFlipper();
 	right_flipper = App->physics->CreateRightFlipper();
-	ball = App->physics->CreateCircle(100, 100, 8);
+	ball = App->physics->CreateCircle(100, 100, 8, b2_dynamicBody, false);
 
 	return true;
 }

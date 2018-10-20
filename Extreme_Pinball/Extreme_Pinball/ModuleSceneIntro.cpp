@@ -234,29 +234,39 @@ void ModuleSceneIntro::SetChains()
 	ladder3 = App->physics->CreateChain(72, -7, ladder, 8, b2_staticBody);
 	ladder3->listener = this;
 
+	/* Ball corridor */
+	ballCorridorDown = App->physics->CreateRectangle(396, 660, 21, 1, b2_staticBody, false);
+	ballCorridorDown->listener = this;
+
+	ballCorridorLeft = App->physics->CreateRectangle(386, 426, 1, 465, b2_staticBody, false);
+	ballCorridorLeft->listener = this;
+
+	ballCorridorRight = App->physics->CreateRectangle(406, 410, 1, 500, b2_staticBody, false);
+	ballCorridorRight->listener = this;
+
 	/* Sensors */
-	left_sensor_10 = App->physics->CreateCircle(156, 562, 15, true);
+	left_sensor_10 = App->physics->CreateCircle(156, 562, 15, b2_staticBody, true);
 	//left_sensor_10->body->GetFixtureList()->SetSensor(); // not necessary, it can be a fuction parameter on the createrectangle() funciton, for example, and will not be needed to create this function hehexd.
 	left_sensor_10->listener = this;
 
-	right_sensor_10 = App->physics->CreateCircle(260, 562, 15, true);
+	right_sensor_10 = App->physics->CreateCircle(260, 562, 15, b2_staticBody, true);
 	right_sensor_10->listener = this;
 
-	right_sensor_10 = App->physics->CreateCircle(260, 562, 15, true);
+	right_sensor_10 = App->physics->CreateCircle(260, 562, 15, b2_staticBody, true);
 	right_sensor_10->listener = this;
 
-	left_sensor_25 = App->physics->CreateCircle(120, 534, 15, true);
+	left_sensor_25 = App->physics->CreateCircle(120, 534, 15, b2_staticBody, true);
 	left_sensor_25->listener = this;
 
-	right_sensor_25 = App->physics->CreateCircle(294, 534, 15, true);
+	right_sensor_25 = App->physics->CreateCircle(294, 534, 15, b2_staticBody, true);
 	right_sensor_25->listener = this;
 
-	left_sensor_50 = App->physics->CreateCircle(91, 510, 15, true);
+	left_sensor_50 = App->physics->CreateCircle(91, 510, 15, b2_staticBody, true);
 	left_sensor_50->listener = this;
 
-	right_sensor_50 = App->physics->CreateCircle(322, 510, 15, true);
+	right_sensor_50 = App->physics->CreateCircle(322, 510, 15, b2_staticBody, true);
 	right_sensor_50->listener = this;
 
-	x2_sensor = App->physics->CreateCircle(226, 430, 18, true);
+	x2_sensor = App->physics->CreateCircle(226, 430, 18, b2_staticBody, true);
 	x2_sensor->listener = this;
 }
