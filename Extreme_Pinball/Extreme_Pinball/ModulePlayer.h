@@ -22,7 +22,11 @@ public:
 	PhysBody* left_flipper;
 	PhysBody* right_flipper;
 
-	SDL_Texture* flipper_texture;
+	SDL_Texture* textures;
 	SDL_Rect left_flipper_rect;
 	SDL_Rect right_flipper_rect;
+
+	int lifes;
+	PhysBody* ball;
+	SDL_Rect ball_rect;
 };

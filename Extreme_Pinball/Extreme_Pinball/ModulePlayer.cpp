@@ -17,6 +17,11 @@ ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, s
 	right_flipper_rect.y = 131;
 	right_flipper_rect.w = 56;
 	right_flipper_rect.h = 18;
+
+	ball_rect.x = 185;
+	ball_rect.y = 71;
+	ball_rect.w = 15;
+	ball_rect.h = 14;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -26,10 +31,11 @@ ModulePlayer::~ModulePlayer()
 bool ModulePlayer::Start()
 {
 	LOG("Loading player");
-	flipper_texture = App->textures->Load("pinball/pinball_elements_2.png");
+	textures = App->textures->Load("pinball/pinball_elements_2.png");
 
 	left_flipper = App->physics->CreateLeftFlipper();
 	right_flipper = App->physics->CreateRightFlipper();
+	ball = App->physics->CreateCircle(100, 100, 8);
 
 	return true;
 }
@@ -38,7 +44,8 @@ bool ModulePlayer::Start()
 bool ModulePlayer::CleanUp()
 {
 	LOG("Unloading player");
-	
+	App->textures->Unload(textures);
+	/* necessary ?-
 	// Destroy left flipper
 	App->physics->world->DestroyBody(left_flipper->b_attached);
 	App->physics->world->DestroyBody(left_flipper->body);
@@ -47,7 +54,7 @@ bool ModulePlayer::CleanUp()
 	App->physics->world->DestroyBody(right_flipper->b_attached);
 	App->physics->world->DestroyBody(right_flipper->body);
 	right_flipper = nullptr;
-
+	*/
 	return true;
 }
 
@@ -55,8 +62,12 @@ bool ModulePlayer::CleanUp()
 update_status ModulePlayer::Update()
 {
 	b2Vec2 anchor_left = left_flipper->joint->GetAnchorB();
-	App->renderer->Blit(flipper_texture, 140, 645, &left_flipper_rect, 1.0f, left_flipper->GetRotation(), anchor_left.x, anchor_left.y); // Pos of the anchor?
-	App->renderer->Blit(flipper_texture, 220, 647, &right_flipper_rect, 1.0f, left_flipper->GetRotation(), anchor_left.x, anchor_left.y); // Pos of the anchor?
+	App->renderer->Blit(textures, 140, 645, &left_flipper_rect, 1.0f, left_flipper->GetRotation(), anchor_left.x, anchor_left.y); // Pos of the anchor?
+	App->renderer->Blit(textures, 220, 647, &right_flipper_rect, 1.0f, right_flipper->GetRotation(), anchor_left.x, anchor_left.y); // Pos of the anchor?
+	
+	int x, y;
+	ball->GetPosition(x, y);
+	App->renderer->Blit(textures, x, y, &ball_rect, 1.0f, ball->GetRotation());
 
 	return UPDATE_CONTINUE;
 }
