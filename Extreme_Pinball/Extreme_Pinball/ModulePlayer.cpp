@@ -35,7 +35,10 @@ bool ModulePlayer::Start()
 
 	left_flipper = App->physics->CreateLeftFlipper();
 	right_flipper = App->physics->CreateRightFlipper();
-	ball = App->physics->CreateCircle(100, 100, 8, b2_dynamicBody, false);
+	launcher = App->physics->CreateRectangle(397, 620, 19, 10, b2_dynamicBody);
+	launcher_aux = App->physics->CreateCircle(397, 680, 15, b2_staticBody);
+	ball = App->physics->CreateCircle(ball_starting_pos.x, ball_starting_pos.y, 8, b2_dynamicBody, false);
+	App->physics->CreateLineJoint(launcher, launcher_aux, 30.0f, 1.0f);
 
 	return true;
 }
@@ -68,6 +71,11 @@ update_status ModulePlayer::Update()
 	int x, y;
 	ball->GetPosition(x, y);
 	App->renderer->Blit(textures, x, y, &ball_rect, 1.0f, ball->GetRotation());
+
+	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
+	{
+		launcher->body->ApplyForceToCenter({0, 10}, true);
+	}
 
 	return UPDATE_CONTINUE;
 }

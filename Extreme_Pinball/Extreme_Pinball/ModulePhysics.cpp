@@ -142,6 +142,19 @@ PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size, b2Body
 	return pbody;
 }
 
+void ModulePhysics::CreateLineJoint(PhysBody* a, PhysBody* b, float frequency, float damping)
+{
+	b2DistanceJointDef def;
+
+	def.bodyA = a->body;
+	def.bodyB = b->body;
+
+	def.dampingRatio = damping;
+	def.frequencyHz = frequency;
+
+	world->CreateJoint(&def);
+}
+
 PhysBody* ModulePhysics::CreateLeftFlipper()
 {
 	b2BodyDef body;

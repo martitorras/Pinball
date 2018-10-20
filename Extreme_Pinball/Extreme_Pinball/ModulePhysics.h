@@ -48,6 +48,8 @@ public:
 	PhysBody* CreateRectangle(int x, int y, int width, int height, b2BodyType type, bool is_sensor = false);
 	PhysBody* CreateChain(int x, int y, int* points, int size, b2BodyType type);
 
+	void CreateLineJoint(PhysBody* a, PhysBody* b, float frequency, float damp);
+
 	PhysBody* CreateLeftFlipper();
 	PhysBody* CreateRightFlipper();
 
