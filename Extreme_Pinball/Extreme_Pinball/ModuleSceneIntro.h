@@ -44,6 +44,15 @@ private:
 	PhysBody* leftBouncer;
 	PhysBody* rightBouncer;
 
+	// Supporters
+	PhysBody* leftSupporter;
+	PhysBody* rightSupporter;
+
+	// Top "ladders"
+	PhysBody* ladder1;
+	PhysBody* ladder2;
+	PhysBody* ladder3;
+
 	// Sensors
 	PhysBody* left_sensor_10;
 	PhysBody* right_sensor_10;

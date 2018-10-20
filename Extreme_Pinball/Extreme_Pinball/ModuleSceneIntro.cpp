@@ -179,6 +179,31 @@ void ModuleSceneIntro::SetChains()
 		149, 300
 	};
 
+	int left_supporter[] = {
+		85, 552,
+		85, 624,
+		145, 660,
+		156, 660,
+		93, 622,
+		94, 552
+	};
+
+	int right_supporter[12] = {
+		288, 659,
+		300, 660,
+		360, 625,
+		361, 551,
+		352, 551,
+		352, 621
+	};
+
+	int ladder[8] = {
+		165, 97,
+		183, 132,
+		196, 126,
+		180, 91
+	};
+
 	/* Game boundaries */
 	gameBoundaries = App->physics->CreateChain(-14, -10, game_boundaries, 8, b2_staticBody);
 	gameBoundaries->listener = this;
@@ -191,6 +216,23 @@ void ModuleSceneIntro::SetChains()
 	rightBouncer = App->physics->CreateChain(167, 308, right_bouncer, 6, b2_staticBody);
 	rightBouncer->body->GetFixtureList()->SetRestitution(2.0f); // Add more bounce
 	rightBouncer->listener = this;
+
+	/* Supporters */
+	leftSupporter = App->physics->CreateChain(-15, -10, left_supporter, 12, b2_staticBody);
+	leftSupporter->listener = this;
+
+	rightSupporter = App->physics->CreateChain(-14, -8, right_supporter, 12, b2_staticBody);
+	rightSupporter->listener = this;
+
+	/* Top "ladders" */
+	ladder1 = App->physics->CreateChain(-14, -7, ladder, 8, b2_staticBody);
+	ladder1->listener = this;
+
+	ladder2 = App->physics->CreateChain(30, -7, ladder, 8, b2_staticBody);
+	ladder2->listener = this;
+
+	ladder3 = App->physics->CreateChain(72, -7, ladder, 8, b2_staticBody);
+	ladder3->listener = this;
 
 	/* Sensors */
 	left_sensor_10 = App->physics->CreateCircle(156, 562, 15, true);
