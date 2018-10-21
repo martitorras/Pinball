@@ -2,6 +2,7 @@
 #include "Module.h"
 #include "Globals.h"
 #include "Box2D/Box2D/Box2D.h"
+#include "p2Point.h"
 
 #define GRAVITY_X 0.0f
 #define GRAVITY_Y -7.0f
@@ -27,8 +28,6 @@ public:
 public:
 	int width, height;
 	b2Body* body;
-	b2Body* b_attached;
-	b2Joint* joint;
 	Module* listener;
 };
 
@@ -48,10 +47,8 @@ public:
 	PhysBody* CreateRectangle(int x, int y, int width, int height, b2BodyType type, bool is_sensor = false);
 	PhysBody* CreateChain(int x, int y, int* points, int size, b2BodyType type);
 
-	void CreateLineJoint(PhysBody* a, PhysBody* b, float frequency, float damp);
-
-	PhysBody* CreateLeftFlipper();
-	PhysBody* CreateRightFlipper();
+	void CreateDistanceJoint(PhysBody* a, PhysBody* b, float frequency, float damp);
+	void CreateRevoluteJoint(PhysBody* a, PhysBody* b, iPoint first_pivot, iPoint second_pivot, int angle_limit_min = INT_MIN, int angle_limit_max = INT_MAX);
 
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);
