@@ -1,6 +1,8 @@
-# Pinballç
+# Pinball
 
-• **Github repository: ** [Extreme Pinball](https://github.com/martitorras/Pinball)
+• Github repository: [Extreme Pinball](https://github.com/martitorras/Pinball)
+
+• [Original Game](https://www.classicgame.com/game/Extreme+Pinball)
 
 ## Authors
 
