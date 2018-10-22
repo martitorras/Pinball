@@ -360,4 +360,16 @@ void ModuleSceneIntro::SetChains()
 
 	x2_sensor = App->physics->CreateCircle(226, 430, 18, b2_staticBody, true);
 	x2_sensor->listener = this;
+
+	top_sensor_1 = App->physics->CreateCircle(136, 85, 3, b2_staticBody, true);
+	top_sensor_1->listener = this;
+
+	top_sensor_2 = App->physics->CreateCircle(155, 64, 6, b2_staticBody, true);
+	top_sensor_2->listener = this;
+
+	top_sensor_3 = App->physics->CreateCircle(181, 54, 8, b2_staticBody, true);
+	top_sensor_3->listener = this;
+
+	top_sensor_4 = App->physics->CreateCircle(215, 43, 10, b2_staticBody, true);
+	top_sensor_4->listener = this;
 }

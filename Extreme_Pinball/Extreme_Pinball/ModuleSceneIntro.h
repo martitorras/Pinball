@@ -78,4 +78,9 @@ private:
 	PhysBody* left_sensor_50;
 	PhysBody* right_sensor_50;
 	PhysBody* x2_sensor;
+
+	PhysBody* top_sensor_1;
+	PhysBody* top_sensor_2;
+	PhysBody* top_sensor_3;
+	PhysBody* top_sensor_4;
 };
