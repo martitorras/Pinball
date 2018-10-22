@@ -61,6 +61,10 @@ private:
 	PhysBody* ballCorridorLeft;
 	PhysBody* ballCorridorRight;
 
+	//grind
+	PhysBody* leftGrind;
+	PhysBody* rightGrind;
+
 	// Sensors
 	PhysBody* left_sensor_10;
 	PhysBody* right_sensor_10;

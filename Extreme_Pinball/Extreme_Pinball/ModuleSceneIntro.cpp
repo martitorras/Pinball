@@ -198,8 +198,8 @@ void ModuleSceneIntro::SetChains()
 	int right_side[26] = {
 		398, 210,
 		393, 232,
-		364, 246,
-		367, 275,
+		369, 246,
+		369, 275,
 		392, 293,
 		394, 395,
 		356, 416,
@@ -248,6 +248,25 @@ void ModuleSceneIntro::SetChains()
 		180, 91
 	};
 
+	int left_grind[10] = {
+		292, 78,
+		309, 90,
+		323, 106,
+		343, 132,
+		350, 160
+	};
+
+	int right_grind[14] = {
+		306, 61,
+		332, 76,
+		354, 92,
+		371, 108,
+		383, 125,
+		394, 149,
+		397, 177
+	};
+
+
 	/* Game boundaries */
 	gameBoundaries = App->physics->CreateChain(-14, -10, game_boundaries, 8, b2_staticBody);
 	gameBoundaries->listener = this;
@@ -291,11 +310,18 @@ void ModuleSceneIntro::SetChains()
 	ballCorridorDown = App->physics->CreateRectangle(396, 660, 21, 0, b2_staticBody, false);
 	ballCorridorDown->listener = this;
 
-	ballCorridorLeft = App->physics->CreateRectangle(386, 426, 0, 465, b2_staticBody, false);
+	ballCorridorLeft = App->physics->CreateRectangle(386, 405, 0, 505, b2_staticBody, false);
 	ballCorridorLeft->listener = this;
 
 	ballCorridorRight = App->physics->CreateRectangle(406, 410, 0, 500, b2_staticBody, false);
 	ballCorridorRight->listener = this;
+
+	/* Left Grind */
+	leftGrind = App->physics->CreateChain(-15, -8, left_grind, 10, b2_staticBody, false);
+	leftGrind->listener = this;
+
+	rightGrind = App->physics->CreateChain(-15, -8, right_grind, 14, b2_staticBody, false);
+	rightGrind->listener = this;
 
 	/* Sensors */
 	left_sensor_10 = App->physics->CreateCircle(156, 562, 15, b2_staticBody, true);
