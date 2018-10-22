@@ -88,4 +88,6 @@ private:
 	PhysBody* red_sensor_2;
 	PhysBody* red_sensor_3;
 	PhysBody* red_sensor_4;
+
+	PhysBody* grind_sensor;
 };

@@ -384,4 +384,7 @@ void ModuleSceneIntro::SetElements()
 
 	red_sensor_4 = App->physics->CreateCircle(240, 121, 6, b2_staticBody, true);
 	red_sensor_4->listener = this;
+
+	grind_sensor = App->physics->CreateCircle(355, 135, 15, b2_staticBody, true);
+	grind_sensor->listener = this;
 }
