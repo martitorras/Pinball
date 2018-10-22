@@ -52,6 +52,11 @@ private:
 	PhysBody* middleBouncerUp;
 	PhysBody* middleBouncerRight;
 
+	// Mini bouncers
+	PhysBody* miniBouncerTop;
+	PhysBody* miniBouncerRight;
+	PhysBody* miniBouncerLeft;
+
 	// Supporters
 	PhysBody* leftSupporter;
 	PhysBody* rightSupporter;

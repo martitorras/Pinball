@@ -223,6 +223,34 @@ void ModuleSceneIntro::SetElements()
 		149, 300
 	};
 
+	int mini_bouncer_top[14] = {
+		101, 156,
+		104, 158,
+		109, 159,
+		114, 158,
+		120, 155,
+		125, 150,
+		125, 144
+	};
+
+	int mini_bouncer_right[12] = {
+		366, 248,
+		361, 251,
+		359, 256,
+		359, 268,
+		362, 273,
+		367, 275
+	};
+
+	int mini_bouncer_left[12] = {
+		84, 360,
+		91, 361,
+		96, 365,
+		99, 372,
+		100, 378,
+		97, 384
+	};
+
 	int left_supporter[] = {
 		85, 552,
 		85, 624,
@@ -301,6 +329,19 @@ void ModuleSceneIntro::SetElements()
 	middleBouncerRight = App->physics->CreateCircle(289, 258, 24, b2_staticBody);
 	middleBouncerRight->body->GetFixtureList()->SetRestitution(3.0f);
 	middleBouncerRight->listener = this;
+
+	/* Mini bouncers */
+	miniBouncerTop = App->physics->CreateChain(-14, -10, mini_bouncer_top, 14, b2_staticBody, false);
+	miniBouncerTop->body->GetFixtureList()->SetRestitution(3.0f);
+	miniBouncerTop->listener = this;
+
+	miniBouncerRight = App->physics->CreateChain(-13, -9, mini_bouncer_right, 12, b2_staticBody, false);
+	miniBouncerRight->body->GetFixtureList()->SetRestitution(3.0f);
+	miniBouncerRight->listener = this;
+
+	miniBouncerLeft = App->physics->CreateChain(-13, -6, mini_bouncer_left, 12, b2_staticBody, false);
+	miniBouncerLeft->body->GetFixtureList()->SetRestitution(3.0f);
+	miniBouncerLeft->listener = this;
 
 	/* Supporters */
 	leftSupporter = App->physics->CreateChain(-15, -10, left_supporter, 12, b2_staticBody);
