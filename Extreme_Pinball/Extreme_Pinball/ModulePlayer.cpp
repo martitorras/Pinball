@@ -40,11 +40,11 @@ bool ModulePlayer::Start()
 
 	left_flipper = App->physics->CreateRectangle(135, 650, 55, 10, b2_dynamicBody);
 	left_flipper_aux = App->physics->CreateCircle(142, 655, 5, b2_staticBody, true);
-	App->physics->CreateRevoluteJoint(left_flipper, left_flipper_aux, { -25, 0 }, { 0, 0 }, -30, 30);
+	App->physics->CreateRevoluteJoint(left_flipper, left_flipper_aux, { -42, 0 }, { 0, 0 }, 30, -20);
 
 	right_flipper = App->physics->CreateRectangle(260, 650, 55, 10, b2_dynamicBody);
 	right_flipper_aux = App->physics->CreateCircle(275, 655, 5, b2_staticBody, true);
-	App->physics->CreateRevoluteJoint(right_flipper, right_flipper_aux, { 25, 0 }, { 0, 0 }, 30, 30);
+	App->physics->CreateRevoluteJoint(right_flipper, right_flipper_aux, { 42, 0 }, { 0, 0 }, 20, -30);
 
 	launcher = App->physics->CreateRectangle(397, 620, 19, 10, b2_dynamicBody);
 	launcher->body->GetFixtureList()->SetRestitution(0.4f);
@@ -109,6 +109,11 @@ update_status ModulePlayer::Update()
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP)
 	{
 		right_flipper->body->ApplyAngularImpulse(DEGTORAD * -650, true);
+	}
+
+	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+	{
+		ball->body->SetTransform(b2Vec2(PIXEL_TO_METERS(ball_starting_pos.x), PIXEL_TO_METERS(ball_starting_pos.y)), 0.0f);
 	}
 
 	int xx, yy;
