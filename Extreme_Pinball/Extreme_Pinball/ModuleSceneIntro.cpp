@@ -37,7 +37,7 @@ bool ModuleSceneIntro::Start()
 
 	background = App->textures->Load("pinball/pinball.png");
 
-	SetChains();
+	SetElements();
 
 	return ret;
 }
@@ -158,7 +158,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 }
 
 
-void ModuleSceneIntro::SetChains()
+void ModuleSceneIntro::SetElements()
 {
 	int game_boundaries[8] = {
 		30, 19,
@@ -361,7 +361,7 @@ void ModuleSceneIntro::SetChains()
 	x2_sensor = App->physics->CreateCircle(226, 430, 18, b2_staticBody, true);
 	x2_sensor->listener = this;
 
-	top_sensor_1 = App->physics->CreateCircle(136, 85, 3, b2_staticBody, true);
+	top_sensor_1 = App->physics->CreateCircle(136, 85, 5, b2_staticBody, true);
 	top_sensor_1->listener = this;
 
 	top_sensor_2 = App->physics->CreateCircle(155, 64, 6, b2_staticBody, true);
@@ -372,4 +372,16 @@ void ModuleSceneIntro::SetChains()
 
 	top_sensor_4 = App->physics->CreateCircle(215, 43, 10, b2_staticBody, true);
 	top_sensor_4->listener = this;
+
+	red_sensor_1 = App->physics->CreateCircle(181, 86, 6, b2_staticBody, true);
+	red_sensor_1->listener = this;
+
+	red_sensor_2 = App->physics->CreateCircle(198, 121, 6, b2_staticBody, true);
+	red_sensor_2->listener = this;
+
+	red_sensor_3 = App->physics->CreateCircle(225, 86, 6, b2_staticBody, true);
+	red_sensor_3->listener = this;
+
+	red_sensor_4 = App->physics->CreateCircle(240, 121, 6, b2_staticBody, true);
+	red_sensor_4->listener = this;
 }

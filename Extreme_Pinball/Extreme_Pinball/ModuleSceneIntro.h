@@ -18,7 +18,7 @@ public:
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 
 public:
-	void SetChains();
+	void SetElements();
 
 public:
 	/*p2List<PhysBody*> circles;
@@ -83,4 +83,9 @@ private:
 	PhysBody* top_sensor_2;
 	PhysBody* top_sensor_3;
 	PhysBody* top_sensor_4;
+
+	PhysBody* red_sensor_1;
+	PhysBody* red_sensor_2;
+	PhysBody* red_sensor_3;
+	PhysBody* red_sensor_4;
 };
