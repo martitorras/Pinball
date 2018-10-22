@@ -49,10 +49,9 @@ bool ModulePlayer::Start()
 	launcher = App->physics->CreateRectangle(397, 620, 19, 10, b2_dynamicBody);
 	launcher->body->GetFixtureList()->SetRestitution(0.4f);
 	launcher_aux = App->physics->CreateCircle(397, 680, 15, b2_staticBody, true);
-	App->physics->CreateDistanceJoint(launcher, launcher_aux, 30.0f, 1.0f);
+	App->physics->CreateDistanceJoint(launcher, launcher_aux, 40.0f, 1.0f);
 
 	ball = App->physics->CreateCircle(ball_starting_pos.x, ball_starting_pos.y, 6, b2_dynamicBody);
-	ball->body->GetFixtureList()->SetDensity(1000.0f);
 
 	return true;
 }
@@ -103,12 +102,12 @@ update_status ModulePlayer::Update()
 
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP)
 	{
-		left_flipper->body->ApplyAngularImpulse(DEGTORAD * 650, true);
+		left_flipper->body->ApplyAngularImpulse(DEGTORAD * 1000, true);
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP)
 	{
-		right_flipper->body->ApplyAngularImpulse(DEGTORAD * -650, true);
+		right_flipper->body->ApplyAngularImpulse(DEGTORAD * -1000, true);
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
