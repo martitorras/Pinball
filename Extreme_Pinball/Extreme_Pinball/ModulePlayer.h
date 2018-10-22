@@ -20,9 +20,7 @@ public:
 
 public:
 	PhysBody* left_flipper;
-	PhysBody* left_flipper_aux;
 	PhysBody* right_flipper;
-	PhysBody* right_flipper_aux;
 
 	PhysBody* launcher;
 	PhysBody* launcher_aux;

@@ -38,13 +38,8 @@ bool ModulePlayer::Start()
 	LOG("Loading player");
 	textures = App->textures->Load("pinball/pinball_elements_2.png");
 
-	left_flipper = App->physics->CreateRectangle(135, 650, 55, 10, b2_dynamicBody);
-	left_flipper_aux = App->physics->CreateCircle(142, 655, 5, b2_staticBody, true);
-	App->physics->CreateRevoluteJoint(left_flipper, left_flipper_aux, { -42, 0 }, { 0, 0 }, 30, -20);
-
-	right_flipper = App->physics->CreateRectangle(260, 650, 55, 10, b2_dynamicBody);
-	right_flipper_aux = App->physics->CreateCircle(275, 655, 5, b2_staticBody, true);
-	App->physics->CreateRevoluteJoint(right_flipper, right_flipper_aux, { 42, 0 }, { 0, 0 }, 20, -30);
+	left_flipper = App->physics->CreateLeftFlipper(166, 655, 50, 10);
+	right_flipper = App->physics->CreateRightFlipper(246, 655, 50, 10);
 
 	launcher = App->physics->CreateRectangle(397, 620, 19, 10, b2_dynamicBody);
 	launcher->body->GetFixtureList()->SetRestitution(0.4f);
@@ -80,10 +75,6 @@ update_status ModulePlayer::Update()
 	int x, y;
 	ball->GetPosition(x, y);
 	App->renderer->Blit(textures, x, y, &ball_rect, 1.0f, ball->GetRotation());
-	right_flipper->GetPosition(x, y);
-	App->renderer->Blit(textures, x, y, &right_flipper_rect, 1.0f, right_flipper->GetRotation());
-	left_flipper->GetPosition(x, y);
-	App->renderer->Blit(textures, x, y, &left_flipper_rect, 1.0f, left_flipper->GetRotation());
 
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
 	{
@@ -92,24 +83,31 @@ update_status ModulePlayer::Update()
 
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
 	{
-		left_flipper->body->ApplyAngularImpulse(DEGTORAD * -360, true);
+		left_flipper->body->ApplyTorque(-60.0f, true);
+	}
+	else if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP)
+	{
+		left_flipper->body->ApplyTorque(100.0f, true);
+	}
+	else // For the start
+	{
+		left_flipper->body->ApplyTorque(100.0f, true);
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
 	{
-		right_flipper->body->ApplyAngularImpulse(DEGTORAD * 360, true);
+		right_flipper->body->ApplyTorque(60.0f, true);
 	}
-
-	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP)
+	else if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP)
 	{
-		left_flipper->body->ApplyAngularImpulse(DEGTORAD * 1000, true);
+		right_flipper->body->ApplyTorque(-100.0f, true);
 	}
-
-	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP)
+	else // For the start
 	{
-		right_flipper->body->ApplyAngularImpulse(DEGTORAD * -1000, true);
+		right_flipper->body->ApplyTorque(-100.0f, true);
 	}
 
+	// Reset ball position
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
 		ball->body->SetTransform(b2Vec2(PIXEL_TO_METERS(ball_starting_pos.x), PIXEL_TO_METERS(ball_starting_pos.y)), 0.0f);

@@ -177,6 +177,109 @@ void ModulePhysics::CreateRevoluteJoint(PhysBody* a, PhysBody* b, iPoint first_p
 	world->CreateJoint(&def);
 }
 
+PhysBody* ModulePhysics::CreateLeftFlipper(int x, int y, int width, int height)
+{
+	b2BodyDef bodyDef;
+	bodyDef.type = b2_dynamicBody;
+	bodyDef.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
+
+	b2Body* b = world->CreateBody(&bodyDef);
+
+	b2PolygonShape box;
+
+	box.SetAsBox(PIXEL_TO_METERS(width) * 0.5f, PIXEL_TO_METERS(height) * 0.5f);
+
+	b2FixtureDef rectangleFixtureDef;
+	rectangleFixtureDef.shape = &box;
+	rectangleFixtureDef.density = 1.0f;
+	b->CreateFixture(&rectangleFixtureDef);
+
+	b2Vec2 centerRectangle = b->GetWorldCenter();
+	centerRectangle += (b2Vec2(PIXEL_TO_METERS(-20), 0));
+
+	b2BodyDef circleBodyDef;
+	circleBodyDef.type = b2_staticBody;
+	circleBodyDef.position.Set(centerRectangle.x, centerRectangle.y);
+
+	b2CircleShape circleToRotate;
+	circleToRotate.m_radius = PIXEL_TO_METERS(5.0f);
+	b2FixtureDef circleToRotateFixtureDef;
+	circleToRotateFixtureDef.shape = &circleToRotate;
+
+	b2Body* b_c = world->CreateBody(&circleBodyDef);
+
+	b_c->CreateFixture(&circleToRotateFixtureDef);
+
+	b2RevoluteJointDef revoluteJointDef;
+	revoluteJointDef.Initialize(b, b_c, centerRectangle);
+	revoluteJointDef.upperAngle = 0.6f;
+	revoluteJointDef.lowerAngle = -0.5f;
+	revoluteJointDef.enableLimit = true;
+	revoluteJointDef.maxMotorTorque = 10.0f;
+	revoluteJointDef.enableMotor = true;
+	b2Joint *joint = world->CreateJoint(&revoluteJointDef);
+
+	PhysBody* pbody = new PhysBody();
+	pbody->body = b;
+	pbody->body_attached = b_c;
+	pbody->joint = joint;
+	b->SetUserData(pbody);
+
+	return pbody;
+}
+
+
+PhysBody* ModulePhysics::CreateRightFlipper(int x, int y, int width, int height)
+{
+	b2BodyDef bodyDef;
+	bodyDef.type = b2_dynamicBody;
+	bodyDef.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
+
+	b2Body* b = world->CreateBody(&bodyDef);
+
+	b2PolygonShape box;
+
+	box.SetAsBox(PIXEL_TO_METERS(width) * 0.5f, PIXEL_TO_METERS(height) * 0.5f);
+
+	b2FixtureDef rectangleFixtureDef;
+	rectangleFixtureDef.shape = &box;
+	rectangleFixtureDef.density = 1.0f;
+	b->CreateFixture(&rectangleFixtureDef);
+
+	b2Vec2 centerRectangle = b->GetWorldCenter();
+	centerRectangle += (b2Vec2(PIXEL_TO_METERS(20), 0));
+
+	b2BodyDef circleBodyDef;
+	circleBodyDef.type = b2_staticBody;
+	circleBodyDef.position.Set(centerRectangle.x, centerRectangle.y);
+
+	b2CircleShape circleToRotate;
+	circleToRotate.m_radius = PIXEL_TO_METERS(5.0f);
+	b2FixtureDef circleToRotateFixtureDef;
+	circleToRotateFixtureDef.shape = &circleToRotate;
+
+	b2Body* b_c = world->CreateBody(&circleBodyDef);
+
+	b_c->CreateFixture(&circleToRotateFixtureDef);
+
+	b2RevoluteJointDef revoluteJointDef;
+	revoluteJointDef.Initialize(b, b_c, centerRectangle);
+	revoluteJointDef.upperAngle = 0.6f;
+	revoluteJointDef.lowerAngle = -0.5f;
+	revoluteJointDef.enableLimit = true;
+	revoluteJointDef.maxMotorTorque = 10.0f;
+	revoluteJointDef.enableMotor = true;
+	b2Joint *joint = world->CreateJoint(&revoluteJointDef);
+
+	PhysBody* pbody = new PhysBody();
+	pbody->body = b;
+	pbody->body_attached = b_c;
+	pbody->joint = joint;
+	b->SetUserData(pbody);
+
+	return pbody;
+}
+
 // 
 update_status ModulePhysics::PostUpdate()
 {

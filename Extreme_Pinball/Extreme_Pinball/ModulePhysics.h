@@ -28,6 +28,8 @@ public:
 public:
 	int width, height;
 	b2Body* body;
+	b2Body* body_attached; // Improvement only used in flippers
+	b2Joint* joint; // Improvement only used in flippers
 	Module* listener;
 };
 
@@ -46,6 +48,9 @@ public:
 	PhysBody* CreateCircle(int x, int y, int radius, b2BodyType type, bool is_sensor = false);
 	PhysBody* CreateRectangle(int x, int y, int width, int height, b2BodyType type, bool is_sensor = false);
 	PhysBody* CreateChain(int x, int y, int* points, int size, b2BodyType type, bool closed = true);
+
+	PhysBody* CreateLeftFlipper(int x, int y, int width, int height);
+	PhysBody* CreateRightFlipper(int x, int y, int width, int height);
 
 	void CreateDistanceJoint(PhysBody* a, PhysBody* b, float frequency, float damp);
 	void CreateRevoluteJoint(PhysBody* a, PhysBody* b, iPoint first_pivot, iPoint second_pivot, int angle_limit_min = INT_MIN, int angle_limit_max = INT_MAX);
