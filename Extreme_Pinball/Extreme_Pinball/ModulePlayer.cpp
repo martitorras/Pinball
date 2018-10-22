@@ -18,8 +18,8 @@ ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, s
 	right_flipper_rect.w = 56;
 	right_flipper_rect.h = 18;
 
-	ball_rect.x = 185;
-	ball_rect.y = 71;
+	ball_rect.x = 184;
+	ball_rect.y = 72;
 	ball_rect.w = 15;
 	ball_rect.h = 14;
 
@@ -47,10 +47,12 @@ bool ModulePlayer::Start()
 	App->physics->CreateRevoluteJoint(right_flipper, right_flipper_aux, { 40, 0 }, { 0, 0 }, 30, -40);
 
 	launcher = App->physics->CreateRectangle(397, 620, 19, 10, b2_dynamicBody);
+	launcher->body->GetFixtureList()->SetRestitution(0.4f);
 	launcher_aux = App->physics->CreateCircle(397, 680, 15, b2_staticBody, true);
 	App->physics->CreateDistanceJoint(launcher, launcher_aux, 30.0f, 1.0f);
 
-	ball = App->physics->CreateCircle(ball_starting_pos.x, ball_starting_pos.y, 8, b2_dynamicBody);
+	ball = App->physics->CreateCircle(ball_starting_pos.x, ball_starting_pos.y, 6, b2_dynamicBody);
+	ball->body->GetFixtureList()->SetDensity(1000.0f);
 
 	return true;
 }
@@ -82,7 +84,7 @@ update_status ModulePlayer::Update()
 
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
 	{
-		launcher->body->ApplyForceToCenter({0, 1000}, true);
+		launcher->body->ApplyForceToCenter({0, 2000}, true);
 	}	
 
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)

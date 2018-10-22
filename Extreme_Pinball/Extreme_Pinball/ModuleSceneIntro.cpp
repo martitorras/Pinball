@@ -167,6 +167,50 @@ void ModuleSceneIntro::SetChains()
 		31, 727
 	};
 
+	int ceiling_boundaries[20] = {
+		419, 172,
+		401, 118,
+		369, 80,
+		317, 41,
+		251, 30,
+		194, 39,
+		144, 72,
+		116, 104,
+		125, 142,
+		39, 175
+	};
+
+	int left_side[24] = {
+		38, 133,
+		41, 190,
+		48, 242,
+		58, 285,
+		75, 338,
+		96, 383,
+		122, 423,
+		66, 530,
+		68, 648,
+		163, 698,
+		163, 712,
+		109, 764
+	};
+
+	int right_side[26] = {
+		398, 210,
+		393, 232,
+		364, 246,
+		367, 275,
+		392, 293,
+		394, 395,
+		356, 416,
+		356, 486,
+		375, 501,
+		374, 649,
+		277, 698,
+		277, 711,
+		357, 748
+	};
+
 	int left_bouncer[6] = {
 		20, 244,
 		58, 320,
@@ -207,9 +251,18 @@ void ModuleSceneIntro::SetChains()
 	/* Game boundaries */
 	gameBoundaries = App->physics->CreateChain(-14, -10, game_boundaries, 8, b2_staticBody);
 	gameBoundaries->listener = this;
+	 
+	ceiling = App->physics->CreateChain(-15, -8, ceiling_boundaries, 20, b2_staticBody, false);
+	ceiling->listener = this;
+
+	leftSide = App->physics->CreateChain(-15, -8, left_side, 24, b2_staticBody, false);
+	leftSide->listener = this;
+
+	rightSide = App->physics->CreateChain(-15, -8, right_side, 26, b2_staticBody, false);
+	rightSide->listener = this;
 
 	/* Bouncers */
-	leftBouncer = App->physics->CreateChain(82, 308, left_bouncer, 6, b2_staticBody);
+	leftBouncer = App->physics->CreateChain(82, 305, left_bouncer, 6, b2_staticBody);
 	leftBouncer->body->GetFixtureList()->SetRestitution(2.0f); // Add more bounce
 	leftBouncer->listener = this;
 
@@ -221,7 +274,7 @@ void ModuleSceneIntro::SetChains()
 	leftSupporter = App->physics->CreateChain(-15, -10, left_supporter, 12, b2_staticBody);
 	leftSupporter->listener = this;
 
-	rightSupporter = App->physics->CreateChain(-14, -8, right_supporter, 12, b2_staticBody);
+	rightSupporter = App->physics->CreateChain(-15, -5, right_supporter, 12, b2_staticBody);
 	rightSupporter->listener = this;
 
 	/* Top "ladders" */

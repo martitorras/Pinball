@@ -39,6 +39,9 @@ public:
 private:
 	// Game boundaries
 	PhysBody* gameBoundaries;
+	PhysBody* ceiling;
+	PhysBody* leftSide;
+	PhysBody* rightSide;
 	
 	// Bouncers
 	PhysBody* leftBouncer;

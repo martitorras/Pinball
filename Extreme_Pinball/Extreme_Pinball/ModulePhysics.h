@@ -45,7 +45,7 @@ public:
 
 	PhysBody* CreateCircle(int x, int y, int radius, b2BodyType type, bool is_sensor = false);
 	PhysBody* CreateRectangle(int x, int y, int width, int height, b2BodyType type, bool is_sensor = false);
-	PhysBody* CreateChain(int x, int y, int* points, int size, b2BodyType type);
+	PhysBody* CreateChain(int x, int y, int* points, int size, b2BodyType type, bool closed = true);
 
 	void CreateDistanceJoint(PhysBody* a, PhysBody* b, float frequency, float damp);
 	void CreateRevoluteJoint(PhysBody* a, PhysBody* b, iPoint first_pivot, iPoint second_pivot, int angle_limit_min = INT_MIN, int angle_limit_max = INT_MAX);
