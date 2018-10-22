@@ -96,4 +96,6 @@ private:
 	PhysBody* red_sensor_4;
 
 	PhysBody* grind_sensor;
+
+	PhysBody* deathZone;
 };

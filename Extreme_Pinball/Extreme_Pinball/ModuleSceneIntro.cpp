@@ -432,4 +432,7 @@ void ModuleSceneIntro::SetElements()
 
 	grind_sensor = App->physics->CreateCircle(355, 135, 15, b2_staticBody, true);
 	grind_sensor->listener = this;
+
+	deathZone = App->physics->CreateRectangle(205, 712, 112, 6, b2_staticBody, true);
+	deathZone->listener = this;
 }
