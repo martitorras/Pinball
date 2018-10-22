@@ -38,13 +38,13 @@ bool ModulePlayer::Start()
 	LOG("Loading player");
 	textures = App->textures->Load("pinball/pinball_elements_2.png");
 
-	left_flipper = App->physics->CreateRectangle(100, 100, 40, 10, b2_dynamicBody);
-	left_flipper_aux = App->physics->CreateCircle(80, 100, 10, b2_staticBody, true);
-	App->physics->CreateRevoluteJoint(left_flipper, left_flipper_aux, { -40, 0 }, { 0, 0 }, 40, -30);
+	left_flipper = App->physics->CreateRectangle(135, 650, 55, 10, b2_dynamicBody);
+	left_flipper_aux = App->physics->CreateCircle(142, 655, 5, b2_staticBody, true);
+	App->physics->CreateRevoluteJoint(left_flipper, left_flipper_aux, { -25, 0 }, { 0, 0 }, -30, 30);
 
-	right_flipper = App->physics->CreateRectangle(200, 200, 40, 10, b2_dynamicBody);
-	right_flipper_aux = App->physics->CreateCircle(220, 200, 10, b2_staticBody, true);
-	App->physics->CreateRevoluteJoint(right_flipper, right_flipper_aux, { 40, 0 }, { 0, 0 }, 30, -40);
+	right_flipper = App->physics->CreateRectangle(260, 650, 55, 10, b2_dynamicBody);
+	right_flipper_aux = App->physics->CreateCircle(275, 655, 5, b2_staticBody, true);
+	App->physics->CreateRevoluteJoint(right_flipper, right_flipper_aux, { 25, 0 }, { 0, 0 }, 30, 30);
 
 	launcher = App->physics->CreateRectangle(397, 620, 19, 10, b2_dynamicBody);
 	launcher->body->GetFixtureList()->SetRestitution(0.4f);
@@ -81,6 +81,10 @@ update_status ModulePlayer::Update()
 	int x, y;
 	ball->GetPosition(x, y);
 	App->renderer->Blit(textures, x, y, &ball_rect, 1.0f, ball->GetRotation());
+	right_flipper->GetPosition(x, y);
+	App->renderer->Blit(textures, x, y, &right_flipper_rect, 1.0f, right_flipper->GetRotation());
+	left_flipper->GetPosition(x, y);
+	App->renderer->Blit(textures, x, y, &left_flipper_rect, 1.0f, left_flipper->GetRotation());
 
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
 	{
