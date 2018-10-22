@@ -289,6 +289,19 @@ void ModuleSceneIntro::SetChains()
 	rightBouncer->body->GetFixtureList()->SetRestitution(2.0f); // Add more bounce
 	rightBouncer->listener = this;
 
+	/* Middle bouncers */
+	middleBouncerLeft = App->physics->CreateCircle(187, 255, 24, b2_staticBody);
+	middleBouncerLeft->body->GetFixtureList()->SetRestitution(3.0f);
+	middleBouncerLeft->listener = this;
+
+	middleBouncerUp = App->physics->CreateCircle(243, 190, 24, b2_staticBody);
+	middleBouncerUp->body->GetFixtureList()->SetRestitution(3.0f);
+	middleBouncerUp->listener = this;
+
+	middleBouncerRight = App->physics->CreateCircle(289, 258, 24, b2_staticBody);
+	middleBouncerRight->body->GetFixtureList()->SetRestitution(3.0f);
+	middleBouncerRight->listener = this;
+
 	/* Supporters */
 	leftSupporter = App->physics->CreateChain(-15, -10, left_supporter, 12, b2_staticBody);
 	leftSupporter->listener = this;
@@ -316,7 +329,7 @@ void ModuleSceneIntro::SetChains()
 	ballCorridorRight = App->physics->CreateRectangle(406, 410, 0, 500, b2_staticBody, false);
 	ballCorridorRight->listener = this;
 
-	/* Left Grind */
+	/* Grinds */
 	leftGrind = App->physics->CreateChain(-15, -8, left_grind, 10, b2_staticBody, false);
 	leftGrind->listener = this;
 
@@ -325,7 +338,6 @@ void ModuleSceneIntro::SetChains()
 
 	/* Sensors */
 	left_sensor_10 = App->physics->CreateCircle(156, 562, 15, b2_staticBody, true);
-	//left_sensor_10->body->GetFixtureList()->SetSensor(); // not necessary, it can be a fuction parameter on the createrectangle() funciton, for example, and will not be needed to create this function hehexd.
 	left_sensor_10->listener = this;
 
 	right_sensor_10 = App->physics->CreateCircle(260, 562, 15, b2_staticBody, true);
