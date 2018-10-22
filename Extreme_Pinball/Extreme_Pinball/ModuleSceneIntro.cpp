@@ -335,9 +335,13 @@ void ModuleSceneIntro::SetElements()
 	miniBouncerTop->body->GetFixtureList()->SetRestitution(3.0f);
 	miniBouncerTop->listener = this;
 
-	miniBouncerRight = App->physics->CreateChain(-13, -9, mini_bouncer_right, 12, b2_staticBody, false);
-	miniBouncerRight->body->GetFixtureList()->SetRestitution(3.0f);
-	miniBouncerRight->listener = this;
+	miniBouncerRight_1 = App->physics->CreateChain(-13, -9, mini_bouncer_right, 12, b2_staticBody, false);
+	miniBouncerRight_1->body->GetFixtureList()->SetRestitution(3.0f);
+	miniBouncerRight_1->listener = this;
+
+	miniBouncerRight_2 = App->physics->CreateChain(-26, 180, mini_bouncer_right, 12, b2_staticBody, false);
+	miniBouncerRight_2->body->GetFixtureList()->SetRestitution(3.0f);
+	miniBouncerRight_2->listener = this;
 
 	miniBouncerLeft = App->physics->CreateChain(-13, -6, mini_bouncer_left, 12, b2_staticBody, false);
 	miniBouncerLeft->body->GetFixtureList()->SetRestitution(3.0f);

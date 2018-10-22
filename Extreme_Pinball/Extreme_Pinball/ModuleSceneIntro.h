@@ -54,7 +54,8 @@ private:
 
 	// Mini bouncers
 	PhysBody* miniBouncerTop;
-	PhysBody* miniBouncerRight;
+	PhysBody* miniBouncerRight_1;
+	PhysBody* miniBouncerRight_2;
 	PhysBody* miniBouncerLeft;
 
 	// Supporters
