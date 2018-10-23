@@ -1,4 +1,4 @@
-# Extreme Pinball
+﻿# Extreme Pinball
 
 • Github repository: [Extreme Pinball](https://github.com/martitorras/Pinball)
 
@@ -33,12 +33,16 @@ Torras Isanta, Martí.
 
 ## Differences with the original
 
-All sound effects and music are new!!!!
+All sound effects and music are new.
 
-Cleaner user interface!!
+Cleaner user interface.
 
 Spider-man and skater guy don't move.
 
 Flags and wooden boxes do nothing.
 
-Score system is a little bit improvised.
+Score system is more linear and clear than the original one.
+
+Combo: hit all three bouncers in the middle and get a free ball!
+
+Added fun sound effects:)
