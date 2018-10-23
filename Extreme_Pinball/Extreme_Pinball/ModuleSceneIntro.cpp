@@ -321,6 +321,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	if (bodyA == grind_sensor && bodyB == App->player->ball)
 	{
 		App->audio->PlayFx(secret);
+		pts += 50;
 	}
 }
 
