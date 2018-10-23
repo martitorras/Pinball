@@ -11,12 +11,10 @@
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 	/*circle = box = rick = NULL;*/
-	background = NULL;
-	background_rect.x = 14;
-	background_rect.y = 8;
-	background_rect.w = 452;
-	background_rect.h = 739;
+	background_rect = { 14, 8, 452, 739 };
 	bouncer_rect = { 268, 68, 54, 55 };
+	electric_right = { 103, 240, 56, 88 };
+	electric_left = { 15, 240, 52, 88 };
 }
 
 ModuleSceneIntro::~ModuleSceneIntro()
@@ -36,7 +34,8 @@ bool ModuleSceneIntro::Start()
 	balls_tex = App->textures->Load("pinball/balls.png");
 
 	bounce = App->audio->LoadFx("pinball/bounce_cartoon.wav");
-	electric_bounce = App->audio->LoadFx("pinball/computer_bounce.wav");
+	strange_bounce = App->audio->LoadFx("pinball/computer_bounce.wav");
+	electric_effect = App->audio->LoadFx("pinball/electric.wav");
 
 	SetElements();
 
@@ -150,6 +149,8 @@ update_status ModuleSceneIntro::Update()
 	App->renderer->Blit(background, 0, 0, &background_rect);
 	App->renderer->Blit(score_tex, 22, 14);
 	App->renderer->Blit(balls_tex, 22, 32);
+
+	//bouncers
 	if (is_bouncer_left)
 	{
 		App->renderer->Blit(sprites, 158, 228, &bouncer_rect);
@@ -181,6 +182,28 @@ update_status ModuleSceneIntro::Update()
 		}
 	}
 
+	//electric bouncers
+	if (is_electric_right)
+	{
+		App->renderer->Blit(sprites, 270, 545, &electric_right);
+		if (recount < 20) ++recount;
+		else
+		{
+			recount = 0;
+			is_electric_right = false;
+		}
+	}
+	if (is_electric_left)
+	{
+		App->renderer->Blit(sprites, 95, 546, &electric_left);
+		if (lecount < 20) ++lecount;
+		else
+		{
+			lecount = 0;
+			is_electric_left = false;
+		}
+	}
+
 	return UPDATE_CONTINUE;
 }
 
@@ -189,6 +212,8 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	if ((bodyA == deathZone && bodyB == App->player->ball))
 	{
 	}
+
+	//bouncers
 	if (bodyA == middleBouncerLeft && bodyB == App->player->ball)
 	{
 		App->audio->PlayFx(bounce);
@@ -203,6 +228,18 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	{
 		App->audio->PlayFx(bounce);
 		is_bouncer_right = true;
+	}
+
+	//electric bouncers
+	if (bodyA == leftBouncer && bodyB == App->player->ball)
+	{
+		App->audio->PlayFx(electric_effect);
+		is_electric_left = true;
+	}
+	else if (bodyA == rightBouncer && bodyB == App->player->ball)
+	{
+		App->audio->PlayFx(electric_effect);
+		is_electric_right = true;
 	}
 }
 

@@ -38,16 +38,20 @@ public:
 	SDL_Texture* balls_tex;
 	SDL_Rect background_rect;
 	SDL_Rect bouncer_rect;
+	SDL_Rect electric_right;
+	SDL_Rect electric_left;
 
 	//effects
-	uint bounce, electric_bounce;
+	uint bounce, strange_bounce, electric_effect;
 
 	//counters
-	uint lcount = 0, ucount = 0, rcount = 0;
+	uint lcount = 0, ucount = 0, rcount = 0, lecount = 0, recount = 0;
 
 	bool is_bouncer_left = false;
 	bool is_bouncer_up = false;
 	bool is_bouncer_right = false;
+	bool is_electric_right = false;
+	bool is_electric_left = false;
 
 private:
 	// Game boundaries
