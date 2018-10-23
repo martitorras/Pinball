@@ -38,8 +38,8 @@ bool ModulePlayer::Start()
 	LOG("Loading player");
 	textures = App->textures->Load("pinball/pinball_elements_2.png");
 
-	left_flipper = App->physics->CreateLeftFlipper(168, 662, 50, 10);
-	right_flipper = App->physics->CreateRightFlipper(244, 662, 50, 10);
+	left_flipper = App->physics->CreateLeftFlipper(168, 662, 60, 10);
+	right_flipper = App->physics->CreateRightFlipper(244, 662, 60, 10);
 
 	launcher = App->physics->CreateRectangle(397, 620, 19, 10, b2_dynamicBody);
 	launcher->body->GetFixtureList()->SetRestitution(0.4f);
@@ -125,12 +125,12 @@ update_status ModulePlayer::Update()
 	int x3, y3;
 	b2Vec2 anchor_flipper_left = left_flipper->joint->GetAnchorB();
 	left_flipper->GetPosition(x3, y3);
-	App->renderer->Blit(textures, x3, y3, &left_flipper_rect, 1.0f, left_flipper->GetRotation(), anchor_flipper_left.x, anchor_flipper_left.y);
+	App->renderer->Blit(textures, x3 - 22, y3 - 11, &left_flipper_rect, 1.0f, left_flipper->GetRotation(), anchor_flipper_left.x + 18, anchor_flipper_left.y - 10);
 	
 	int x4, y4;
 	b2Vec2 anchor_flipper_right = right_flipper->joint->GetAnchorB();
 	right_flipper->GetPosition(x4, y4);
-	App->renderer->Blit(textures, x4, y4, &right_flipper_rect, 1.0f, right_flipper->GetRotation(), anchor_flipper_right.x + 48, anchor_flipper_right.y - 7);
+	App->renderer->Blit(textures, x4, y4, &right_flipper_rect, 1.0f, right_flipper->GetRotation(), anchor_flipper_right.x + 50, anchor_flipper_right.y - 10);
 
 	return UPDATE_CONTINUE;
 }

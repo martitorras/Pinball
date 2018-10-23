@@ -195,7 +195,7 @@ PhysBody* ModulePhysics::CreateLeftFlipper(int x, int y, int width, int height)
 	b->CreateFixture(&rectangleFixtureDef);
 
 	b2Vec2 centerRectangle = b->GetWorldCenter();
-	centerRectangle += (b2Vec2(PIXEL_TO_METERS(-20), 0));
+	centerRectangle += (b2Vec2(PIXEL_TO_METERS(-25), 0));
 
 	b2BodyDef circleBodyDef;
 	circleBodyDef.type = b2_staticBody;
@@ -247,7 +247,7 @@ PhysBody* ModulePhysics::CreateRightFlipper(int x, int y, int width, int height)
 	b->CreateFixture(&rectangleFixtureDef);
 
 	b2Vec2 centerRectangle = b->GetWorldCenter();
-	centerRectangle += (b2Vec2(PIXEL_TO_METERS(20), 0));
+	centerRectangle += (b2Vec2(PIXEL_TO_METERS(25), 0));
 
 	b2BodyDef circleBodyDef;
 	circleBodyDef.type = b2_staticBody;
