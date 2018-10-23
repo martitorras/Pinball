@@ -226,7 +226,7 @@ update_status ModuleSceneIntro::Update()
 
 void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
-	if ((bodyA == deathZone && bodyB == App->player->ball))
+	if ((bodyA == deathZone && bodyB == App->player->ball) && bls > 0)
 	{
 		bls--;
 	}

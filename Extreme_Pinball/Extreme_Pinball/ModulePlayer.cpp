@@ -6,6 +6,7 @@
 #include "ModuleRender.h"
 #include "ModuleInput.h"
 #include "ModuleAudio.h"
+#include "ModuleSceneIntro.h"
 
 ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -115,7 +116,7 @@ update_status ModulePlayer::Update()
 	}
 
 	// Reset ball position
-	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN && App->scene_intro->bls > 0)
 	{
 		ball->body->SetTransform(b2Vec2(PIXEL_TO_METERS(ball_starting_pos.x), PIXEL_TO_METERS(ball_starting_pos.y)), 0.0f);
 	}
