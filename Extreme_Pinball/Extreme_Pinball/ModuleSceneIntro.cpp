@@ -16,7 +16,11 @@ ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Modul
 	bouncer_rect = { 268, 68, 54, 55 };
 	electric_right = { 103, 240, 56, 88 };
 	electric_left = { 15, 240, 52, 88 };
+<<<<<<< HEAD
 	bottom_launcher_rect = { 395, 655, 32, 31};
+=======
+	p25 = { 22, 22, 36, 34 };
+>>>>>>> 8b5234dc550f11b0511a7626a54cd690969e2d5e
 }
 
 ModuleSceneIntro::~ModuleSceneIntro()
@@ -168,7 +172,7 @@ update_status ModuleSceneIntro::Update()
 	if (is_bouncer_left)
 	{
 		App->renderer->Blit(sprites, 158, 228, &bouncer_rect);
-		if (lcount < 20) ++lcount;
+		if (lcount < 30) ++lcount;
 		else
 		{
 			lcount = 0;
@@ -178,7 +182,7 @@ update_status ModuleSceneIntro::Update()
 	if (is_bouncer_up)
 	{
 		App->renderer->Blit(sprites, 214, 162, &bouncer_rect);
-		if (ucount < 20) ++ucount;
+		if (ucount < 30) ++ucount;
 		else
 		{
 			ucount = 0;
@@ -188,7 +192,7 @@ update_status ModuleSceneIntro::Update()
 	if (is_bouncer_right)
 	{
 		App->renderer->Blit(sprites, 262, 231, &bouncer_rect);
-		if (rcount < 20) ++rcount;
+		if (rcount < 30) ++rcount;
 		else
 		{
 			rcount = 0;
@@ -217,12 +221,30 @@ update_status ModuleSceneIntro::Update()
 			is_electric_left = false;
 		}
 	}
+	if (is_p25)
+	{
+		App->renderer->Blit(sprites, 102, 518, &p25);
+		App->renderer->Blit(sprites, 276, 518, &p25);
+		if (p25count < 80) ++p25count;
+		else
+		{
+			p25count = 0;
+			is_p25 = false;
+		}
+	}
 
 	// Reset balls
 	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
 	{
 		pts = 0;
 		bls = 5;
+		pts = 0;
+	}
+
+	if(rcount != 0 && ucount != 0 && lcount != 0)
+	{
+		pts += 25;
+		is_p25 = true;
 	}
 
 	return UPDATE_CONTINUE;
