@@ -215,6 +215,12 @@ update_status ModuleSceneIntro::Update()
 		}
 	}
 
+	// Reset balls
+	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
+	{
+		bls = 5;
+	}
+
 	return UPDATE_CONTINUE;
 }
 
@@ -230,19 +236,19 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	{
 		App->audio->PlayFx(bounce);
 		is_bouncer_left = true;
-		pts += 5;
+		pts += 10;
 	}
 	else if (bodyA == middleBouncerUp && bodyB == App->player->ball)
 	{
 		App->audio->PlayFx(bounce);
 		is_bouncer_up = true;
-		pts += 5;
+		pts += 10;
 	}
 	else if (bodyA == middleBouncerRight && bodyB == App->player->ball)
 	{
 		App->audio->PlayFx(bounce);
 		is_bouncer_right = true;
-		pts += 5;
+		pts += 10;
 	}
 
 	//electric bouncers
