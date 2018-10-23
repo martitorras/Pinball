@@ -16,6 +16,7 @@ ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Modul
 	background_rect.y = 8;
 	background_rect.w = 452;
 	background_rect.h = 739;
+	bouncer_rect = { 268, 68, 54, 55 };
 }
 
 ModuleSceneIntro::~ModuleSceneIntro()
@@ -37,6 +38,10 @@ bool ModuleSceneIntro::Start()
 	sensor = App->physics->CreateRectangleSensor(100, 100, 100, 100);*/
 
 	background = App->textures->Load("pinball/pinball.png");
+	sprites = App->textures->Load("pinball/pinball_elements_2.png");
+
+	bounce = App->audio->LoadFx("pinball/bounce_cartoon.wav");
+	electric_bounce = App->audio->LoadFx("pinball/computer_bounce.wav");
 
 	SetElements();
 
@@ -52,6 +57,7 @@ bool ModuleSceneIntro::CleanUp()
 	App->textures->Unload(rick);*/
 
 	App->textures->Unload(background);
+	App->textures->Unload(sprites);
 
 	return true;
 }
@@ -149,6 +155,36 @@ update_status ModuleSceneIntro::Update()
 	}*/
 
 	App->renderer->Blit(background, 0, 0, &background_rect);
+	if (is_bouncer_left)
+	{
+		App->renderer->Blit(sprites, 158, 228, &bouncer_rect);
+		if (lcount < 20) ++lcount;
+		else
+		{
+			lcount = 0;
+			is_bouncer_left = false;
+		}
+	}
+	if (is_bouncer_up)
+	{
+		App->renderer->Blit(sprites, 214, 162, &bouncer_rect);
+		if (ucount < 20) ++ucount;
+		else
+		{
+			ucount = 0;
+			is_bouncer_up = false;
+		}
+	}
+	if (is_bouncer_right)
+	{
+		App->renderer->Blit(sprites, 262, 231, &bouncer_rect);
+		if (rcount < 20) ++rcount;
+		else
+		{
+			rcount = 0;
+			is_bouncer_right = false;
+		}
+	}
 
 	return UPDATE_CONTINUE;
 }
@@ -157,7 +193,21 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
 	if ((bodyA == deathZone && bodyB == App->player->ball))
 	{
-
+	}
+	if (bodyA == middleBouncerLeft && bodyB == App->player->ball)
+	{
+		App->audio->PlayFx(bounce);
+		is_bouncer_left = true;
+	}
+	else if (bodyA == middleBouncerUp && bodyB == App->player->ball)
+	{
+		App->audio->PlayFx(bounce);
+		is_bouncer_up = true;
+	}
+	else if (bodyA == middleBouncerRight && bodyB == App->player->ball)
+	{
+		App->audio->PlayFx(bounce);
+		is_bouncer_right = true;
 	}
 }
 

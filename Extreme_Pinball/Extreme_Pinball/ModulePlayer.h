@@ -34,4 +34,7 @@ public:
 	PhysBody* ball;
 	SDL_Rect ball_rect;
 	iPoint ball_starting_pos = { 398, 570 };
+
+	//effects
+	uint hopper = NULL;
 };

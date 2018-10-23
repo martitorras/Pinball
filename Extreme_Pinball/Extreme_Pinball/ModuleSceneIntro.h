@@ -33,8 +33,19 @@ public:
 	uint bonus_fx;*/
 
 	SDL_Texture* background;
+	SDL_Texture* sprites;
 	SDL_Rect background_rect;
+	SDL_Rect bouncer_rect;
 
+	//effects
+	uint bounce, electric_bounce;
+
+	//counters
+	uint lcount = 0, ucount = 0, rcount = 0;
+
+	bool is_bouncer_left = false;
+	bool is_bouncer_up = false;
+	bool is_bouncer_right = false;
 
 private:
 	// Game boundaries
