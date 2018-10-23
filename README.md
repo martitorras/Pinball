@@ -22,11 +22,14 @@ Torras Isanta, Martí.
 
 **Down arrow:** charge and launch the ball.
 
+**1:** reset the ball.
+
+**2:** restart game.
+
 ## Debug keys
 
 **F1:** show colliders and sensors.
 
-**1:** reset the ball.
 
 ## Differences with the original
 
@@ -36,6 +39,6 @@ Cleaner user interface!!
 
 Spider-man and skater guy don't move.
 
-flags and wooden boxes do nothing.
+Flags and wooden boxes do nothing.
 
 Score system is a little bit improvised.

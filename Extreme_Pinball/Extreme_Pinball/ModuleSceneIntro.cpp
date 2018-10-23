@@ -16,6 +16,7 @@ ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Modul
 	bouncer_rect = { 268, 68, 54, 55 };
 	electric_right = { 103, 240, 56, 88 };
 	electric_left = { 15, 240, 52, 88 };
+	bottom_launcher_rect = { 395, 655, 32, 31};
 }
 
 ModuleSceneIntro::~ModuleSceneIntro()
@@ -155,6 +156,8 @@ update_status ModuleSceneIntro::Update()
 	App->renderer->Blit(score_tex, 22, 14);
 	App->renderer->Blit(balls_tex, 22, 32);
 
+	//App->renderer->Blit(background, 381, 647, &bottom_launcher_rect);
+
 	sprintf_s(num_points, 10, "%7d", pts);
 	sprintf_s(num_balls, 10, "%7d", bls);
 
@@ -218,6 +221,7 @@ update_status ModuleSceneIntro::Update()
 	// Reset balls
 	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
 	{
+		pts = 0;
 		bls = 5;
 	}
 

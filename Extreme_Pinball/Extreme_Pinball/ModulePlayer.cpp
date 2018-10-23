@@ -25,10 +25,10 @@ ModulePlayer::ModulePlayer(Application* app, bool start_enabled) : Module(app, s
 	ball_rect.w = 15;
 	ball_rect.h = 14;
 
-	launcher_rect.x = 349;
+	launcher_rect.x = 350;
 	launcher_rect.y = 289;
-	launcher_rect.w = 13;
-	launcher_rect.h = 2;
+	launcher_rect.w = 12;
+	launcher_rect.h = 21;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -129,7 +129,7 @@ update_status ModulePlayer::Update()
 
 	int x2, y2;
 	launcher->GetPosition(x2, y2);
-	App->renderer->Blit(textures, x2 + 1, y2, &launcher_rect, 1.0f, launcher->GetRotation());
+	App->renderer->Blit(textures, x2 + 3, y2 + 2, &launcher_rect, 1.0f, launcher->GetRotation());
 
 	int x3, y3;
 	b2Vec2 anchor_flipper_left = left_flipper->joint->GetAnchorB();
@@ -140,6 +140,8 @@ update_status ModulePlayer::Update()
 	b2Vec2 anchor_flipper_right = right_flipper->joint->GetAnchorB();
 	right_flipper->GetPosition(x4, y4);
 	App->renderer->Blit(textures, x4 - 29, y4 - 7, &right_flipper_rect, 1.0f, right_flipper->GetRotation(), anchor_flipper_right.x + 24, anchor_flipper_right.y - 10);
+
+	App->renderer->Blit(App->scene_intro->background, 381, 647, &App->scene_intro->bottom_launcher_rect);
 
 	return UPDATE_CONTINUE;
 }

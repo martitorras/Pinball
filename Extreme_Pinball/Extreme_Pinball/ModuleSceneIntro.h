@@ -36,6 +36,7 @@ public:
 	SDL_Texture* sprites;
 	
 	SDL_Rect background_rect;
+	SDL_Rect bottom_launcher_rect;
 	SDL_Rect bouncer_rect;
 	SDL_Rect electric_right;
 	SDL_Rect electric_left;
