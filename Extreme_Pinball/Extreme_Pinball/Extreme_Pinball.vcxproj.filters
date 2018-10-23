@@ -48,6 +48,9 @@
     <ClCompile Include="ModuleWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ModuleFonts.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -90,6 +93,9 @@
       <Filter>Resource Files</Filter>
     </ClInclude>
     <ClInclude Include="p2Point.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleFonts.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
   </ItemGroup>
