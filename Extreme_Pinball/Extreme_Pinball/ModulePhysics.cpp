@@ -16,7 +16,7 @@ ModulePhysics::ModulePhysics(Application* app, bool start_enabled) : Module(app,
 {
 	world = NULL;
 	mouse_joint = NULL;
-	debug = true;
+	debug = false;
 }
 
 // Destructor
@@ -515,4 +515,19 @@ void ModulePhysics::BeginContact(b2Contact* contact)
 
 	if(physB && physB->listener != NULL)
 		physB->listener->OnCollision(physB, physA);
+}
+
+void PhysBody::Turn(float torque)
+{
+	body->ApplyTorque(torque, true);
+}
+
+void PhysBody::Force(b2Vec2 force)
+{
+	body->ApplyForceToCenter(force, true);
+}
+
+void PhysBody::SetPosition(b2Vec2 pos, float angle)
+{
+	body->SetTransform(b2Vec2(PIXEL_TO_METERS(pos.x), PIXEL_TO_METERS(pos.y)), 0.0f);
 }

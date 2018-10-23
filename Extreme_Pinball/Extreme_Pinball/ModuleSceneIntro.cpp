@@ -236,6 +236,7 @@ update_status ModuleSceneIntro::Update()
 	// Reset balls
 	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
 	{
+		App->player->ball->SetPosition(b2Vec2(App->player->ball_starting_pos.x, App->player->ball_starting_pos.y));
 		pts = 0;
 		bls = 5;
 		pts = 0;

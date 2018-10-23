@@ -82,7 +82,7 @@ update_status ModulePlayer::Update()
 {
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_REPEAT)
 	{
-		launcher->body->ApplyForceToCenter({0, 2000}, true);
+		launcher->Force(b2Vec2(0.0f, 2000.0f));
 	}
 	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_UP)
 	{
@@ -91,34 +91,34 @@ update_status ModulePlayer::Update()
 
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
 	{
-		left_flipper->body->ApplyTorque(-60.0f, true);
+		left_flipper->Turn(-60.0f);
 	}
 	else if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP)
 	{
-		left_flipper->body->ApplyTorque(100.0f, true);
+		left_flipper->Turn(100.0f);
 	}
 	else // For the start
 	{
-		left_flipper->body->ApplyTorque(100.0f, true);
+		left_flipper->Turn(100.0f);
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
 	{
-		right_flipper->body->ApplyTorque(60.0f, true);
+		right_flipper->Turn(60.0f);
 	}
 	else if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP)
 	{
-		right_flipper->body->ApplyTorque(-100.0f, true);
+		right_flipper->Turn(-100.0f);
 	}
 	else // For the start
 	{
-		right_flipper->body->ApplyTorque(-100.0f, true);
+		right_flipper->Turn(-100.0f);
 	}
 
 	// Reset ball position
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN && App->scene_intro->bls > 0)
 	{
-		ball->body->SetTransform(b2Vec2(PIXEL_TO_METERS(ball_starting_pos.x), PIXEL_TO_METERS(ball_starting_pos.y)), 0.0f);
+		ball->SetPosition(b2Vec2(ball_starting_pos.x, ball_starting_pos.y));
 	}
 
 	/* DRAW */
