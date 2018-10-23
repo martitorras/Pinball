@@ -38,8 +38,8 @@ bool ModulePlayer::Start()
 	LOG("Loading player");
 	textures = App->textures->Load("pinball/pinball_elements_2.png");
 
-	left_flipper = App->physics->CreateLeftFlipper(168, 655, 50, 10);
-	right_flipper = App->physics->CreateRightFlipper(244, 655, 50, 10);
+	left_flipper = App->physics->CreateLeftFlipper(168, 662, 50, 10);
+	right_flipper = App->physics->CreateRightFlipper(244, 662, 50, 10);
 
 	launcher = App->physics->CreateRectangle(397, 620, 19, 10, b2_dynamicBody);
 	launcher->body->GetFixtureList()->SetRestitution(0.4f);
