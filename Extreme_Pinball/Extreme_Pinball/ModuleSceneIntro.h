@@ -34,12 +34,19 @@ public:
 
 	SDL_Texture* background;
 	SDL_Texture* sprites;
-	SDL_Texture* score_tex;
-	SDL_Texture* balls_tex;
+	
 	SDL_Rect background_rect;
 	SDL_Rect bouncer_rect;
 	SDL_Rect electric_right;
 	SDL_Rect electric_left;
+
+	SDL_Texture* score_tex;
+	SDL_Texture* balls_tex;
+	int font_numbers = -1;
+	char num_points[10];
+	char num_balls[10];
+	uint pts = 0;
+	uint bls = 5;
 
 	//effects
 	uint bounce, strange_bounce, electric_effect;

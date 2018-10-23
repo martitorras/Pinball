@@ -7,6 +7,7 @@
 #include "ModuleAudio.h"
 #include "ModulePhysics.h"
 #include "ModulePlayer.h"
+#include "ModuleFonts.h"
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -37,6 +38,8 @@ bool ModuleSceneIntro::Start()
 	strange_bounce = App->audio->LoadFx("pinball/computer_bounce.wav");
 	electric_effect = App->audio->LoadFx("pinball/electric.wav");
 
+	font_numbers = App->fonts->Load("pinball/font_numbers.png", "0123456789", 1);
+
 	SetElements();
 
 	return ret;
@@ -50,6 +53,8 @@ bool ModuleSceneIntro::CleanUp()
 	App->textures->Unload(sprites);
 	App->textures->Unload(score_tex);
 	App->textures->Unload(balls_tex);
+
+	App->fonts->UnLoad(font_numbers);
 
 	return true;
 }
@@ -150,6 +155,12 @@ update_status ModuleSceneIntro::Update()
 	App->renderer->Blit(score_tex, 22, 14);
 	App->renderer->Blit(balls_tex, 22, 32);
 
+	sprintf_s(num_points, 10, "%7d", pts);
+	sprintf_s(num_balls, 10, "%7d", bls);
+
+	App->fonts->Blit(100, 14, font_numbers, num_points);
+	App->fonts->Blit(100, 32, font_numbers, num_balls);
+
 	//bouncers
 	if (is_bouncer_left)
 	{
@@ -211,6 +222,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
 	if ((bodyA == deathZone && bodyB == App->player->ball))
 	{
+		bls--;
 	}
 
 	//bouncers
@@ -218,16 +230,19 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	{
 		App->audio->PlayFx(bounce);
 		is_bouncer_left = true;
+		pts += 5;
 	}
 	else if (bodyA == middleBouncerUp && bodyB == App->player->ball)
 	{
 		App->audio->PlayFx(bounce);
 		is_bouncer_up = true;
+		pts += 5;
 	}
 	else if (bodyA == middleBouncerRight && bodyB == App->player->ball)
 	{
 		App->audio->PlayFx(bounce);
 		is_bouncer_right = true;
+		pts += 5;
 	}
 
 	//electric bouncers
