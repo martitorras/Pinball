@@ -16,11 +16,11 @@ ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Modul
 	bouncer_rect = { 268, 68, 54, 55 };
 	electric_right = { 103, 240, 56, 88 };
 	electric_left = { 15, 240, 52, 88 };
-<<<<<<< HEAD
+
 	bottom_launcher_rect = { 395, 655, 32, 31};
-=======
+
 	p25 = { 22, 22, 36, 34 };
->>>>>>> 8b5234dc550f11b0511a7626a54cd690969e2d5e
+
 }
 
 ModuleSceneIntro::~ModuleSceneIntro()
