@@ -34,6 +34,8 @@ public:
 
 	SDL_Texture* background;
 	SDL_Texture* sprites;
+	SDL_Texture* score_tex;
+	SDL_Texture* balls_tex;
 	SDL_Rect background_rect;
 	SDL_Rect bouncer_rect;
 

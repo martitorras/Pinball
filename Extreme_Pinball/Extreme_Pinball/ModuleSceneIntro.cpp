@@ -30,15 +30,10 @@ bool ModuleSceneIntro::Start()
 
 	App->renderer->camera.x = App->renderer->camera.y = 0;
 
-	/*circle = App->textures->Load("pinball/wheel.png"); 
-	box = App->textures->Load("pinball/crate.png");
-	rick = App->textures->Load("pinball/rick_head.png");
-	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
-
-	sensor = App->physics->CreateRectangleSensor(100, 100, 100, 100);*/
-
 	background = App->textures->Load("pinball/pinball.png");
 	sprites = App->textures->Load("pinball/pinball_elements_2.png");
+	score_tex = App->textures->Load("pinball/score.png");
+	balls_tex = App->textures->Load("pinball/balls.png");
 
 	bounce = App->audio->LoadFx("pinball/bounce_cartoon.wav");
 	electric_bounce = App->audio->LoadFx("pinball/computer_bounce.wav");
@@ -52,12 +47,10 @@ bool ModuleSceneIntro::Start()
 bool ModuleSceneIntro::CleanUp()
 {
 	LOG("Unloading Intro scene");
-	/*App->textures->Unload(circle);
-	App->textures->Unload(box);
-	App->textures->Unload(rick);*/
-
 	App->textures->Unload(background);
 	App->textures->Unload(sprites);
+	App->textures->Unload(score_tex);
+	App->textures->Unload(balls_tex);
 
 	return true;
 }
@@ -155,6 +148,8 @@ update_status ModuleSceneIntro::Update()
 	}*/
 
 	App->renderer->Blit(background, 0, 0, &background_rect);
+	App->renderer->Blit(score_tex, 22, 14);
+	App->renderer->Blit(balls_tex, 22, 32);
 	if (is_bouncer_left)
 	{
 		App->renderer->Blit(sprites, 158, 228, &bouncer_rect);
