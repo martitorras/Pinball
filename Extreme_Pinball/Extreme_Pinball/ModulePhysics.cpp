@@ -531,3 +531,13 @@ void PhysBody::SetPosition(b2Vec2 pos, float angle)
 {
 	body->SetTransform(b2Vec2(PIXEL_TO_METERS(pos.x), PIXEL_TO_METERS(pos.y)), 0.0f);
 }
+
+void PhysBody::SetLinearVelocity(b2Vec2 speed)
+{
+	body->SetLinearVelocity(b2Vec2(PIXEL_TO_METERS(speed.x), PIXEL_TO_METERS(speed.y)));
+}
+
+void PhysBody::SetAngularVelocity(float speed)
+{
+	body->SetAngularVelocity(speed);
+}

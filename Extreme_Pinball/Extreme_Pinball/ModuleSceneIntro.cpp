@@ -42,6 +42,11 @@ bool ModuleSceneIntro::Start()
 	bounce = App->audio->LoadFx("pinball/bounce_cartoon.wav");
 	strange_bounce = App->audio->LoadFx("pinball/computer_bounce.wav");
 	electric_effect = App->audio->LoadFx("pinball/electric.wav");
+	mini_bounce = App->audio->LoadFx("pinball/mini_bouncer.wav");
+	secret = App->audio->LoadFx("pinball/tyler-fkin-1.wav");
+	secret2 = App->audio->LoadFx("pinball/gett-of-my-game-tyler1.wav");
+
+	App->audio->PlayMusic("pinball/background_music.ogg", 2);
 
 	font_numbers = App->fonts->Load("pinball/font_numbers.png", "0123456789", 1);
 
@@ -228,6 +233,7 @@ update_status ModuleSceneIntro::Update()
 		if (p25count < 80) ++p25count;
 		else
 		{
+			bls++;
 			p25count = 0;
 			is_p25 = false;
 		}
@@ -236,6 +242,9 @@ update_status ModuleSceneIntro::Update()
 	// Reset balls
 	if (App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
 	{
+		App->player->ball->body->SetLinearVelocity(b2Vec2(0, 0));
+		App->player->ball->body->SetAngularVelocity(0.0f);
+		App->audio->PlayFx(secret2);
 		App->player->ball->SetPosition(b2Vec2(App->player->ball_starting_pos.x, App->player->ball_starting_pos.y));
 		pts = 0;
 		bls = 5;
@@ -258,7 +267,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		bls--;
 	}
 
-	//bouncers
+	// Bouncers
 	if (bodyA == middleBouncerLeft && bodyB == App->player->ball)
 	{
 		App->audio->PlayFx(bounce);
@@ -278,7 +287,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		pts += 10;
 	}
 
-	//electric bouncers
+	// Electric bouncers
 	if (bodyA == leftBouncer && bodyB == App->player->ball)
 	{
 		App->audio->PlayFx(electric_effect);
@@ -288,6 +297,30 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	{
 		App->audio->PlayFx(electric_effect);
 		is_electric_right = true;
+	}
+
+	// Mini bouncers
+	if (bodyA == miniBouncerLeft && bodyB == App->player->ball)
+	{
+		App->audio->PlayFx(mini_bounce);
+	}
+	else if (bodyA == miniBouncerTop && bodyB == App->player->ball)
+	{
+		App->audio->PlayFx(mini_bounce);
+	}
+	else if (bodyA == miniBouncerRight_1 && bodyB == App->player->ball)
+	{
+		App->audio->PlayFx(mini_bounce);
+	}
+	else if (bodyA == miniBouncerRight_2 && bodyB == App->player->ball)
+	{
+		App->audio->PlayFx(mini_bounce);
+	}
+
+	// Grind sensor
+	if (bodyA == grind_sensor && bodyB == App->player->ball)
+	{
+		App->audio->PlayFx(secret);
 	}
 }
 

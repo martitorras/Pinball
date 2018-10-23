@@ -27,6 +27,8 @@ public:
 	void Turn(float torque);
 	void Force(b2Vec2 force);
 	void SetPosition(b2Vec2 pos, float angle = 0.0f);
+	void SetLinearVelocity(b2Vec2 speed);
+	void SetAngularVelocity(float speed);
 
 public:
 	int width, height;

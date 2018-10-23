@@ -49,6 +49,8 @@ bool ModulePlayer::Start()
 	App->physics->CreateDistanceJoint(launcher, launcher_aux, 40.0f, 1.0f);
 
 	ball = App->physics->CreateCircle(ball_starting_pos.x, ball_starting_pos.y, 6, b2_dynamicBody);
+	ball->body->SetLinearVelocity(b2Vec2(0, 0));
+	ball->body->SetAngularVelocity(0.0f);
 
 	//effects
 	hopper = App->audio->LoadFx("pinball/hopper.wav");
@@ -118,6 +120,8 @@ update_status ModulePlayer::Update()
 	// Reset ball position
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN && App->scene_intro->bls > 0)
 	{
+		ball->body->SetLinearVelocity(b2Vec2(0, 0));
+		ball->body->SetAngularVelocity(0.0f);
 		ball->SetPosition(b2Vec2(ball_starting_pos.x, ball_starting_pos.y));
 	}
 
