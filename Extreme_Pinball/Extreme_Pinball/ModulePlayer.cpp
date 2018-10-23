@@ -125,12 +125,12 @@ update_status ModulePlayer::Update()
 	int x3, y3;
 	b2Vec2 anchor_flipper_left = left_flipper->joint->GetAnchorB();
 	left_flipper->GetPosition(x3, y3);
-	App->renderer->Blit(textures, x2 - 232, y2 + 20, &left_flipper_rect, 1.0f, left_flipper->GetRotation(), anchor_flipper_left.x, anchor_flipper_left.y);
+	App->renderer->Blit(textures, x3, y3, &left_flipper_rect, 1.0f, left_flipper->GetRotation(), anchor_flipper_left.x, anchor_flipper_left.y);
 	
 	int x4, y4;
 	b2Vec2 anchor_flipper_right = right_flipper->joint->GetAnchorB();
-	left_flipper->GetPosition(x4, y4);
-	App->renderer->Blit(textures, x2 - 175, y2 + 24, &right_flipper_rect, 1.0f, right_flipper->GetRotation(), anchor_flipper_right.x + 48, anchor_flipper_right.y - 7);
+	right_flipper->GetPosition(x4, y4);
+	App->renderer->Blit(textures, x4, y4, &right_flipper_rect, 1.0f, right_flipper->GetRotation(), anchor_flipper_right.x + 48, anchor_flipper_right.y - 7);
 
 	return UPDATE_CONTINUE;
 }
