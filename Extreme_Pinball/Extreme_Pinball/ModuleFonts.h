@@ -20,7 +20,7 @@ class ModuleFonts : public Module
 {
 public:
 
-	ModuleFonts();
+	ModuleFonts(Application* app, bool start_enabled = true);
 	~ModuleFonts();
 
 	// Load Font
