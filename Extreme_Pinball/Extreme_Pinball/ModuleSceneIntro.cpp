@@ -20,6 +20,7 @@ ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Modul
 	bottom_launcher_rect = { 395, 655, 32, 31};
 
 	p25 = { 22, 22, 36, 34 };
+	p50 = { 123, 23, 34, 33 };
 
 }
 
@@ -230,12 +231,24 @@ update_status ModuleSceneIntro::Update()
 	{
 		App->renderer->Blit(sprites, 102, 518, &p25);
 		App->renderer->Blit(sprites, 276, 518, &p25);
-		if (p25count < 80) ++p25count;
+		if (p25count < 100) ++p25count;
 		else
 		{
 			bls++;
 			p25count = 0;
 			is_p25 = false;
+		}
+	}
+	if (is_p50)
+	{
+		App->renderer->Blit(sprites, 75, 494, &p50);
+		App->renderer->Blit(sprites, 305, 493, &p50);
+		if (p50count < 100) ++p50count;
+		else
+		{
+			bls++;
+			p50count = 0;
+			is_p50 = false;
 		}
 	}
 
@@ -322,6 +335,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	{
 		App->audio->PlayFx(secret);
 		pts += 50;
+		is_p50 = true;
 	}
 }
 

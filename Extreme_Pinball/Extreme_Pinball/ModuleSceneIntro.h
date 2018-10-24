@@ -41,6 +41,7 @@ public:
 	SDL_Rect electric_right;
 	SDL_Rect electric_left;
 	SDL_Rect p25;
+	SDL_Rect p50;
 
 	SDL_Texture* score_tex;
 	SDL_Texture* balls_tex;
@@ -54,7 +55,7 @@ public:
 	uint bounce, strange_bounce, electric_effect, mini_bounce, secret, secret2;
 
 	//counters
-	uint lcount = 0, ucount = 0, rcount = 0, lecount = 0, recount = 0, p25count = 0;
+	uint lcount = 0, ucount = 0, rcount = 0, lecount = 0, recount = 0, p25count = 0, p50count = 0;
 
 	bool is_bouncer_left = false;
 	bool is_bouncer_up = false;
@@ -62,6 +63,7 @@ public:
 	bool is_electric_right = false;
 	bool is_electric_left = false;
 	bool is_p25 = false;
+	bool is_p50 = false;
 
 private:
 	// Game boundaries
