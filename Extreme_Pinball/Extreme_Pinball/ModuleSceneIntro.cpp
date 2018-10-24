@@ -70,100 +70,17 @@ bool ModuleSceneIntro::CleanUp()
 
 	App->fonts->UnLoad(font_numbers);
 
+	Unload();
+
 	return true;
 }
 
 // Update: draw background
 update_status ModuleSceneIntro::Update()
 {
-	/*if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
-	{
-		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 25));
-		circles.getLast()->data->listener = this;
-	}
-
-	if(App->input->GetKey(SDL_SCANCODE_2) == KEY_DOWN)
-	{
-		boxes.add(App->physics->CreateRectangle(App->input->GetMouseX(), App->input->GetMouseY(), 100, 50));
-	}
-
-	if(App->input->GetKey(SDL_SCANCODE_3) == KEY_DOWN)
-	{
-		// Pivot 0, 0
-		int rick_head[64] = {
-			14, 36,
-			42, 40,
-			40, 0,
-			75, 30,
-			88, 4,
-			94, 39,
-			111, 36,
-			104, 58,
-			107, 62,
-			117, 67,
-			109, 73,
-			110, 85,
-			106, 91,
-			109, 99,
-			103, 104,
-			100, 115,
-			106, 121,
-			103, 125,
-			98, 126,
-			95, 137,
-			83, 147,
-			67, 147,
-			53, 140,
-			46, 132,
-			34, 136,
-			38, 126,
-			23, 123,
-			30, 114,
-			10, 102,
-			29, 90,
-			0, 75,
-			30, 62
-		};
-
-		ricks.add(App->physics->CreateChain(App->input->GetMouseX(), App->input->GetMouseY(), rick_head, 64));
-	}*/
-
-	// Prepare for raycast ------------------------------------------------------
-	
 	iPoint mouse;
 	mouse.x = App->input->GetMouseX();
 	mouse.y = App->input->GetMouseY();
-
-	// All draw functions ------------------------------------------------------
-	/*p2List_item<PhysBody*>* c = circles.getFirst();
-
-	while(c != NULL)
-	{
-		int x, y;
-		c->data->GetPosition(x, y);
-		App->renderer->Blit(circle, x, y, NULL, 1.0f, c->data->GetRotation());
-		c = c->next;
-	}
-
-	c = boxes.getFirst();
-
-	while(c != NULL)
-	{
-		int x, y;
-		c->data->GetPosition(x, y);
-		App->renderer->Blit(box, x, y, NULL, 1.0f, c->data->GetRotation());
-		c = c->next;
-	}
-
-	c = ricks.getFirst();
-
-	while(c != NULL)
-	{
-		int x, y;
-		c->data->GetPosition(x, y);
-		App->renderer->Blit(rick, x, y, NULL, 1.0f, c->data->GetRotation());
-		c = c->next;
-	}*/
 
 	App->renderer->Blit(background, 0, 0, &background_rect);
 	App->renderer->Blit(score_tex, 20, 32);
@@ -264,7 +181,6 @@ update_status ModuleSceneIntro::Update()
 		App->player->ball->SetPosition(b2Vec2(App->player->ball_starting_pos.x, App->player->ball_starting_pos.y));
 		pts = 0;
 		bls = 5;
-		// max_pts = 0;
 	}
 
 	if(rcount != 0 && ucount != 0 && lcount != 0)
@@ -636,4 +552,133 @@ void ModuleSceneIntro::SetElements()
 
 	deathZone = App->physics->CreateRectangle(205, 712, 112, 6, b2_staticBody, true);
 	deathZone->listener = this;
+}
+
+void ModuleSceneIntro::Unload()
+{
+	App->physics->world->DestroyBody(gameBoundaries->body);
+	gameBoundaries = nullptr;
+
+	App->physics->world->DestroyBody(ceiling->body);
+	ceiling = nullptr;
+
+	App->physics->world->DestroyBody(leftSide->body);
+	leftSide = nullptr;
+
+	App->physics->world->DestroyBody(rightSide->body);
+	rightSide = nullptr;
+
+	App->physics->world->DestroyBody(leftBouncer->body);
+	leftBouncer = nullptr;
+
+	App->physics->world->DestroyBody(rightBouncer->body);
+	rightBouncer = nullptr;
+
+	App->physics->world->DestroyBody(middleBouncerLeft->body);
+	middleBouncerLeft = nullptr;
+
+	App->physics->world->DestroyBody(middleBouncerUp->body);
+	middleBouncerUp = nullptr;
+
+	App->physics->world->DestroyBody(middleBouncerRight->body);
+	middleBouncerRight = nullptr;
+
+	App->physics->world->DestroyBody(miniBouncerTop->body);
+	miniBouncerTop = nullptr;
+
+	App->physics->world->DestroyBody(miniBouncerRight_1->body);
+	miniBouncerRight_1 = nullptr;
+
+	App->physics->world->DestroyBody(miniBouncerRight_2->body);
+	miniBouncerRight_2 = nullptr;
+
+	App->physics->world->DestroyBody(miniBouncerLeft->body);
+	miniBouncerLeft = nullptr;
+
+	App->physics->world->DestroyBody(littleBouncerLeft->body);
+	littleBouncerLeft = nullptr;
+
+	App->physics->world->DestroyBody(littleBouncerRight->body);
+	littleBouncerRight = nullptr;
+
+	App->physics->world->DestroyBody(leftSupporter->body);
+	leftSupporter = nullptr;
+
+	App->physics->world->DestroyBody(rightSupporter->body);
+	rightSupporter = nullptr;
+
+	App->physics->world->DestroyBody(ladder1->body);
+	ladder1 = nullptr;
+
+	App->physics->world->DestroyBody(ladder2->body);
+	ladder2 = nullptr;
+
+	App->physics->world->DestroyBody(ladder3->body);
+	ladder3 = nullptr;
+
+	App->physics->world->DestroyBody(ballCorridorDown->body);
+	ballCorridorDown = nullptr;
+
+	App->physics->world->DestroyBody(ballCorridorLeft->body);
+	ballCorridorLeft = nullptr;
+
+	App->physics->world->DestroyBody(ballCorridorRight->body);
+	ballCorridorRight = nullptr;
+
+	App->physics->world->DestroyBody(leftGrind->body);
+	leftGrind = nullptr;
+
+	App->physics->world->DestroyBody(rightGrind->body);
+	rightGrind = nullptr;
+
+	App->physics->world->DestroyBody(left_sensor_10->body);
+	left_sensor_10 = nullptr;
+
+	App->physics->world->DestroyBody(right_sensor_10->body);
+	right_sensor_10 = nullptr;
+
+	App->physics->world->DestroyBody(left_sensor_25->body);
+	left_sensor_25 = nullptr;
+
+	App->physics->world->DestroyBody(right_sensor_25->body);
+	right_sensor_25 = nullptr;
+
+	App->physics->world->DestroyBody(left_sensor_50->body);
+	left_sensor_50 = nullptr;
+
+	App->physics->world->DestroyBody(right_sensor_50->body);
+	right_sensor_50 = nullptr;
+
+	App->physics->world->DestroyBody(x2_sensor->body);
+	x2_sensor = nullptr;
+
+	App->physics->world->DestroyBody(top_sensor_1->body);
+	top_sensor_1 = nullptr;
+
+	App->physics->world->DestroyBody(top_sensor_2->body);
+	top_sensor_2 = nullptr;
+
+	App->physics->world->DestroyBody(top_sensor_3->body);
+	top_sensor_3 = nullptr;
+
+	App->physics->world->DestroyBody(top_sensor_4->body);
+	top_sensor_4 = nullptr;
+
+	App->physics->world->DestroyBody(red_sensor_1->body);
+	red_sensor_1 = nullptr;
+
+	App->physics->world->DestroyBody(red_sensor_2->body);
+	red_sensor_2 = nullptr;
+
+	App->physics->world->DestroyBody(red_sensor_3->body);
+	red_sensor_3 = nullptr;
+
+	App->physics->world->DestroyBody(red_sensor_4->body);
+	red_sensor_4 = nullptr;
+
+	App->physics->world->DestroyBody(grind_sensor->body);
+	grind_sensor = nullptr;
+
+	App->physics->world->DestroyBody(deathZone->body);
+	deathZone = nullptr;
 }

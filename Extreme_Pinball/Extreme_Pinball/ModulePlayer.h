@@ -33,7 +33,7 @@ public:
 	int lifes;
 	PhysBody* ball;
 	SDL_Rect ball_rect;
-	iPoint ball_starting_pos = { 398, 500 };
+	iPoint ball_starting_pos = { 396, 500 };
 
 	//effects
 	uint hopper = NULL;

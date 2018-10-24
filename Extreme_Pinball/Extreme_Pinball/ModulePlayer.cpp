@@ -49,8 +49,8 @@ bool ModulePlayer::Start()
 	App->physics->CreateDistanceJoint(launcher, launcher_aux, 40.0f, 1.0f);
 
 	ball = App->physics->CreateCircle(ball_starting_pos.x, ball_starting_pos.y, 6, b2_dynamicBody);
-	ball->body->SetLinearVelocity(b2Vec2(0, 0));
-	ball->body->SetAngularVelocity(0.0f);
+	/*ball->body->SetLinearVelocity(b2Vec2(0, 0));
+	ball->body->SetAngularVelocity(0.0f);*/
 
 	// Effects
 	hopper = App->audio->LoadFx("pinball/hopper.wav");
@@ -64,19 +64,24 @@ bool ModulePlayer::CleanUp()
 {
 	LOG("Unloading player");
 	App->textures->Unload(textures);
-	 
-	// DELETE ALL BODIESSSSSSSSSSSSSSSSSSSSSSSSS
-
-	/* necessary ?-
-	// Destroy left flipper
-	App->physics->world->DestroyBody(left_flipper->b_attached);
+	
+	App->physics->world->DestroyBody(left_flipper->body_attached);
 	App->physics->world->DestroyBody(left_flipper->body);
 	left_flipper = nullptr;
 
-	App->physics->world->DestroyBody(right_flipper->b_attached);
+	App->physics->world->DestroyBody(right_flipper->body_attached);
 	App->physics->world->DestroyBody(right_flipper->body);
 	right_flipper = nullptr;
-	*/
+
+	App->physics->world->DestroyBody(launcher->body);
+	launcher = nullptr;
+
+	App->physics->world->DestroyBody(launcher_aux->body);
+	launcher_aux = nullptr;
+
+	App->physics->world->DestroyBody(ball->body);
+	ball = nullptr;
+
 	return true;
 }
 
@@ -123,8 +128,8 @@ update_status ModulePlayer::Update()
 	// Reset ball position
 	if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN && App->scene_intro->bls > 0)
 	{
-		ball->body->SetLinearVelocity(b2Vec2(0, 0));
-		ball->body->SetAngularVelocity(0.0f);
+		/*ball->body->SetLinearVelocity(b2Vec2(0, 0));
+		ball->body->SetAngularVelocity(0.0f);*/
 		ball->SetPosition(b2Vec2(ball_starting_pos.x, ball_starting_pos.y));
 	}
 
