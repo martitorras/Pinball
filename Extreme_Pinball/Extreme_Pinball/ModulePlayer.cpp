@@ -93,28 +93,28 @@ update_status ModulePlayer::Update()
 
 	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_DOWN)
 	{
-		left_flipper->Turn(-60.0f);
+		left_flipper->Turn(-40.0f);
 	}
 	else if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP)
 	{
-		left_flipper->Turn(100.0f);
+		left_flipper->Turn(80.0f);
 	}
 	else // For the start
 	{
-		left_flipper->Turn(100.0f);
+		left_flipper->Turn(80.0f);
 	}
 
 	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_REPEAT || App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_DOWN)
 	{
-		right_flipper->Turn(60.0f);
+		right_flipper->Turn(40.0f);
 	}
 	else if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP)
 	{
-		right_flipper->Turn(-100.0f);
+		right_flipper->Turn(-80.0f);
 	}
 	else // For the start
 	{
-		right_flipper->Turn(-100.0f);
+		right_flipper->Turn(-80.0f);
 	}
 
 	// Reset ball position

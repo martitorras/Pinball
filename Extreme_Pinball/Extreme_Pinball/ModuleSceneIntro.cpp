@@ -166,11 +166,8 @@ update_status ModuleSceneIntro::Update()
 	App->renderer->Blit(score_tex, 22, 14);
 	App->renderer->Blit(balls_tex, 22, 32);
 
-	//App->renderer->Blit(background, 381, 647, &bottom_launcher_rect);
-
 	sprintf_s(num_points, 10, "%7d", pts);
 	sprintf_s(num_balls, 10, "%7d", bls);
-
 	App->fonts->Blit(100, 14, font_numbers, num_points);
 	App->fonts->Blit(100, 32, font_numbers, num_balls);
 
@@ -492,41 +489,41 @@ void ModuleSceneIntro::SetElements()
 
 	/* Bouncers */
 	leftBouncer = App->physics->CreateChain(82, 305, left_bouncer, 6, b2_staticBody);
-	leftBouncer->body->GetFixtureList()->SetRestitution(2.0f); // Add more bounce
+	leftBouncer->body->GetFixtureList()->SetRestitution(1.8f); // Add more bounce
 	leftBouncer->listener = this;
 
 	rightBouncer = App->physics->CreateChain(167, 308, right_bouncer, 6, b2_staticBody);
-	rightBouncer->body->GetFixtureList()->SetRestitution(2.0f); // Add more bounce
+	rightBouncer->body->GetFixtureList()->SetRestitution(1.8f); // Add more bounce
 	rightBouncer->listener = this;
 
 	/* Middle bouncers */
 	middleBouncerLeft = App->physics->CreateCircle(187, 255, 24, b2_staticBody);
-	middleBouncerLeft->body->GetFixtureList()->SetRestitution(3.0f);
+	middleBouncerLeft->body->GetFixtureList()->SetRestitution(1.8f);
 	middleBouncerLeft->listener = this;
 
 	middleBouncerUp = App->physics->CreateCircle(243, 190, 24, b2_staticBody);
-	middleBouncerUp->body->GetFixtureList()->SetRestitution(3.0f);
+	middleBouncerUp->body->GetFixtureList()->SetRestitution(1.8f);
 	middleBouncerUp->listener = this;
 
 	middleBouncerRight = App->physics->CreateCircle(289, 258, 24, b2_staticBody);
-	middleBouncerRight->body->GetFixtureList()->SetRestitution(3.0f);
+	middleBouncerRight->body->GetFixtureList()->SetRestitution(1.8f);
 	middleBouncerRight->listener = this;
 
 	/* Mini bouncers */
 	miniBouncerTop = App->physics->CreateChain(-14, -10, mini_bouncer_top, 14, b2_staticBody, false);
-	miniBouncerTop->body->GetFixtureList()->SetRestitution(3.0f);
+	miniBouncerTop->body->GetFixtureList()->SetRestitution(1.8f);
 	miniBouncerTop->listener = this;
 
 	miniBouncerRight_1 = App->physics->CreateChain(-13, -9, mini_bouncer_right, 12, b2_staticBody, false);
-	miniBouncerRight_1->body->GetFixtureList()->SetRestitution(3.0f);
+	miniBouncerRight_1->body->GetFixtureList()->SetRestitution(1.8f);
 	miniBouncerRight_1->listener = this;
 
 	miniBouncerRight_2 = App->physics->CreateChain(-26, 180, mini_bouncer_right, 12, b2_staticBody, false);
-	miniBouncerRight_2->body->GetFixtureList()->SetRestitution(3.0f);
+	miniBouncerRight_2->body->GetFixtureList()->SetRestitution(1.8f);
 	miniBouncerRight_2->listener = this;
 
 	miniBouncerLeft = App->physics->CreateChain(-13, -6, mini_bouncer_left, 12, b2_staticBody, false);
-	miniBouncerLeft->body->GetFixtureList()->SetRestitution(3.0f);
+	miniBouncerLeft->body->GetFixtureList()->SetRestitution(1.8f);
 	miniBouncerLeft->listener = this;
 
 	/* Supporters */
