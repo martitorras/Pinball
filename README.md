@@ -28,9 +28,9 @@ Torras Isanta, Martí.
 
 ## Debug keys
 
-**F1:** show colliders and sensors.
+**F1:** debug mode, show colliders and sensors.
 
-**Hold mouse left button:** move ball.
+**Hold mouse left button:** move ball (only in debug mode).
 
 ## Differences with the original
 

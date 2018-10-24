@@ -541,3 +541,8 @@ void PhysBody::SetAngularVelocity(float speed)
 {
 	body->SetAngularVelocity(speed);
 }
+
+void PhysBody::SetBounce(float bounce)
+{
+	body->GetFixtureList()->SetRestitution(bounce);
+}

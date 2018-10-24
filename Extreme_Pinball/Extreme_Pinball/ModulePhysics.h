@@ -29,6 +29,7 @@ public:
 	void SetPosition(b2Vec2 pos, float angle = 0.0f);
 	void SetLinearVelocity(b2Vec2 speed);
 	void SetAngularVelocity(float speed);
+	void SetBounce(float bounce);
 
 public:
 	int width, height;
