@@ -30,6 +30,7 @@ Torras Isanta, Martí.
 
 **F1:** show colliders and sensors.
 
+**Hold mouse left button:** move ball.
 
 ## Differences with the original
 
