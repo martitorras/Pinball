@@ -46,6 +46,7 @@ bool ModuleSceneIntro::Start()
 	mini_bounce = App->audio->LoadFx("pinball/mini_bouncer.wav");
 	secret = App->audio->LoadFx("pinball/tyler-fkin-1.wav");
 	secret2 = App->audio->LoadFx("pinball/gett-of-my-game-tyler1.wav");
+	t1ah = App->audio->LoadFx("pinball/ah-tyler1.wav");
 
 	App->audio->PlayMusic("pinball/background_music.ogg", 2);
 
@@ -268,6 +269,7 @@ update_status ModuleSceneIntro::Update()
 	{
 		pts += 25;
 		is_p25 = true;
+		App->audio->PlayFx(t1ah);
 	}
 
 	return UPDATE_CONTINUE;

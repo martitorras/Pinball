@@ -52,7 +52,7 @@ public:
 	uint bls = 5;
 
 	//effects
-	uint bounce, strange_bounce, electric_effect, mini_bounce, secret, secret2;
+	uint bounce, strange_bounce, electric_effect, mini_bounce, secret, secret2, t1ah;
 
 	//counters
 	uint lcount = 0, ucount = 0, rcount = 0, lecount = 0, recount = 0, p25count = 0, p50count = 0;
