@@ -91,6 +91,10 @@ private:
 	PhysBody* miniBouncerRight_2;
 	PhysBody* miniBouncerLeft;
 
+	// Little bouncers
+	PhysBody* littleBouncerLeft;
+	PhysBody* littleBouncerRight;
+
 	// Supporters
 	PhysBody* leftSupporter;
 	PhysBody* rightSupporter;

@@ -37,4 +37,5 @@ public:
 
 	//effects
 	uint hopper = NULL;
+	uint flipper_effect = NULL;
 };

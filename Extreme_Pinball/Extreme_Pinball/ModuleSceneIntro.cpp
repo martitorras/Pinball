@@ -539,6 +539,15 @@ void ModuleSceneIntro::SetElements()
 	miniBouncerLeft->body->GetFixtureList()->SetRestitution(1.8f);
 	miniBouncerLeft->listener = this;
 
+	/* Little bouncers */
+	littleBouncerLeft = App->physics->CreateRectangle(61, 640, 14, 3, b2_staticBody);
+	littleBouncerLeft->SetBounce(1.8f);
+	littleBouncerLeft->listener = this;
+
+	littleBouncerRight = App->physics->CreateRectangle(353, 640, 14, 3, b2_staticBody);
+	littleBouncerRight->SetBounce(1.8f);
+	littleBouncerRight->listener = this;
+
 	/* Supporters */
 	leftSupporter = App->physics->CreateChain(-15, -10, left_supporter, 12, b2_staticBody);
 	leftSupporter->listener = this;

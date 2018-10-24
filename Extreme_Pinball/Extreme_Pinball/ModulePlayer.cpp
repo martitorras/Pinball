@@ -52,8 +52,9 @@ bool ModulePlayer::Start()
 	ball->body->SetLinearVelocity(b2Vec2(0, 0));
 	ball->body->SetAngularVelocity(0.0f);
 
-	//effects
+	// Effects
 	hopper = App->audio->LoadFx("pinball/hopper.wav");
+	flipper_effect = App->audio->LoadFx("pinball/flipper_sound.wav");
 
 	return true;
 }
@@ -97,6 +98,7 @@ update_status ModulePlayer::Update()
 	}
 	else if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_UP)
 	{
+		App->audio->PlayFx(flipper_effect);
 		left_flipper->Turn(80.0f);
 	}
 	else // For the start
@@ -110,6 +112,7 @@ update_status ModulePlayer::Update()
 	}
 	else if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_UP)
 	{
+		App->audio->PlayFx(flipper_effect);
 		right_flipper->Turn(-80.0f);
 	}
 	else // For the start
