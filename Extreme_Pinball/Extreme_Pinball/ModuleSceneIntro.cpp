@@ -38,6 +38,7 @@ bool ModuleSceneIntro::Start()
 	background = App->textures->Load("pinball/pinball.png");
 	sprites = App->textures->Load("pinball/pinball_elements_2.png");
 	score_tex = App->textures->Load("pinball/score.png");
+	high_score_tex = App->textures->Load("pinball/high_score.png");
 	balls_tex = App->textures->Load("pinball/balls.png");
 
 	bounce = App->audio->LoadFx("pinball/bounce_cartoon.wav");
@@ -64,6 +65,7 @@ bool ModuleSceneIntro::CleanUp()
 	App->textures->Unload(background);
 	App->textures->Unload(sprites);
 	App->textures->Unload(score_tex);
+	App->textures->Unload(high_score_tex);
 	App->textures->Unload(balls_tex);
 
 	App->fonts->UnLoad(font_numbers);
@@ -164,13 +166,16 @@ update_status ModuleSceneIntro::Update()
 	}*/
 
 	App->renderer->Blit(background, 0, 0, &background_rect);
-	App->renderer->Blit(score_tex, 22, 14);
-	App->renderer->Blit(balls_tex, 22, 32);
+	App->renderer->Blit(score_tex, 20, 32);
+	App->renderer->Blit(high_score_tex, 20, 14);
+	App->renderer->Blit(balls_tex, 20, 50);
 
 	sprintf_s(num_points, 10, "%7d", pts);
+	sprintf_s(num_max_points, 10, "%7d", max_pts);
 	sprintf_s(num_balls, 10, "%7d", bls);
-	App->fonts->Blit(100, 14, font_numbers, num_points);
-	App->fonts->Blit(100, 32, font_numbers, num_balls);
+	App->fonts->Blit(100, 32, font_numbers, num_points);
+	App->fonts->Blit(150, 14, font_numbers, num_max_points);
+	App->fonts->Blit(100, 50, font_numbers, num_balls);
 
 	//bouncers
 	if (is_bouncer_left)
@@ -259,7 +264,7 @@ update_status ModuleSceneIntro::Update()
 		App->player->ball->SetPosition(b2Vec2(App->player->ball_starting_pos.x, App->player->ball_starting_pos.y));
 		pts = 0;
 		bls = 5;
-		pts = 0;
+		// max_pts = 0;
 	}
 
 	if(rcount != 0 && ucount != 0 && lcount != 0)
@@ -267,6 +272,12 @@ update_status ModuleSceneIntro::Update()
 		pts += 25;
 		is_p25 = true;
 		App->audio->PlayFx(t1ah);
+	}
+
+	// pts - max_pts
+	if (max_pts < pts)
+	{
+		max_pts = pts;
 	}
 
 	return UPDATE_CONTINUE;

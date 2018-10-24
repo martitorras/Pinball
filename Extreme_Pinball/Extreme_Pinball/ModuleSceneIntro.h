@@ -44,11 +44,15 @@ public:
 	SDL_Rect p50;
 
 	SDL_Texture* score_tex;
+	SDL_Texture* high_score_tex;
 	SDL_Texture* balls_tex;
+
 	int font_numbers = -1;
 	char num_points[10];
+	char num_max_points[10];
 	char num_balls[10];
 	uint pts = 0;
+	uint max_pts;
 	uint bls = 5;
 
 	//effects
