@@ -19,6 +19,7 @@ ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Modul
 
 	bottom_launcher_rect = { 395, 655, 32, 31};
 
+	p10 = { 74, 22, 34, 35 };
 	p25 = { 22, 22, 36, 34 };
 	p50 = { 123, 23, 34, 33 };
 
@@ -148,11 +149,28 @@ update_status ModuleSceneIntro::Update()
 			is_electric_left = false;
 		}
 	}
+
+	//point lights
+	if (is_p10)
+	{
+		App->renderer->Blit(sprites, 139, 544, &p10);
+		App->renderer->Blit(sprites, 242, 544, &p10);
+		if (p10count < 20) ++p10count;
+		else
+		{
+			p10count = 0;
+			is_p10 = false;
+		}
+	}
 	if (is_p25)
 	{
 		App->renderer->Blit(sprites, 102, 518, &p25);
 		App->renderer->Blit(sprites, 276, 518, &p25);
-		if (p25count < 100) ++p25count;
+		if (p25count < 100)
+		{
+			if(p25count == 1) pts += 25;
+			++p25count;
+		}
 		else
 		{
 			bls++;
@@ -186,7 +204,6 @@ update_status ModuleSceneIntro::Update()
 
 	if(rcount != 0 && ucount != 0 && lcount != 0)
 	{
-		pts += 25;
 		is_p25 = true;
 		App->audio->PlayFx(t1ah);
 	}
@@ -213,18 +230,21 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 	{
 		App->audio->PlayFx(bounce);
 		is_bouncer_left = true;
+		is_p10 = true;
 		pts += 10;
 	}
 	else if (bodyA == middleBouncerUp && bodyB == App->player->ball)
 	{
 		App->audio->PlayFx(bounce);
 		is_bouncer_up = true;
+		is_p10 = true;
 		pts += 10;
 	}
 	else if (bodyA == middleBouncerRight && bodyB == App->player->ball)
 	{
 		App->audio->PlayFx(bounce);
 		is_bouncer_right = true;
+		is_p10 = true;
 		pts += 10;
 	}
 
