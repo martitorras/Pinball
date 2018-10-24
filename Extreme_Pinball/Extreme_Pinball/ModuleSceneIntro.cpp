@@ -50,6 +50,7 @@ bool ModuleSceneIntro::Start()
 	t1ah = App->audio->LoadFx("pinball/ah-tyler1.wav");
 
 	App->audio->PlayMusic("pinball/background_music.ogg", 2);
+	shut_down_effect = App->audio->LoadFx("pinball/shut_down.wav");
 
 	font_numbers = App->fonts->Load("pinball/font_numbers.png", "0123456789", 1);
 
@@ -203,6 +204,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 {
 	if ((bodyA == deathZone && bodyB == App->player->ball) && bls > 0)
 	{
+		App->audio->PlayFx(shut_down_effect);
 		bls--;
 	}
 
